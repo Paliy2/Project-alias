@@ -57,3 +57,4 @@ airport/aiport-web-server/src/test/resources/attachments/*
 
 .DS_Store
 *.pgd
+/.metadata/
