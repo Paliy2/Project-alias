@@ -6,8 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import project_alias.config.Modules;
 import project_alias.config.personnel.PersonWebUiConfig;
+import project_alias.equipments.EquipmentClass;
 import project_alias.personnel.Person;
-
+import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.utils.Pair;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
@@ -81,6 +82,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
+        
+        // Equipments Module
+        final EquipmentClassWebUiConfig equipmentClassWebUiConfig = EquipmentClassWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration 
         configApp()
@@ -104,6 +108,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
                 .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
                     .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
                     .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
+                    .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
                     .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
                 .done()
             .done().done()
