@@ -41,7 +41,7 @@ public class EquipmentClass extends ActivatableAbstractEntity<DynamicEntityKey> 
     private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(EquipmentClass.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
-    
+
     @IsProperty
     @MapTo
     @Title(value = "Title", desc = "A unique equipment class title.")
@@ -58,19 +58,19 @@ public class EquipmentClass extends ActivatableAbstractEntity<DynamicEntityKey> 
     public String getTitle() {
         return title;
     } 
-    
+
     @Override
     @Observable
-	protected EquipmentClass setActive(boolean active) {
-		super.setActive(active);
-		return this;
-	}
-    
+    protected EquipmentClass setActive(boolean active) {
+        super.setActive(active);
+        return this;
+    }
+
     @Override
     @Observable
-	public EquipmentClass setDesc(String desc) {
-		super.setDesc(desc);
-		return this;
-	}
-    
+    public EquipmentClass setDesc(String desc) {
+        super.setDesc(desc);
+        return this;
+    }
+
 }

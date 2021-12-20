@@ -27,11 +27,11 @@ public class EquipmentClassDao extends CommonEntityDao<EquipmentClass> implement
     public EquipmentClassDao(final IFilter filter) {
         super(filter);
     }
-    
+
     @Override
-	public EquipmentClass new_() {
-		return super.new_().setActive(true);
-	}
+    public EquipmentClass new_() {
+        return super.new_().setActive(true);
+    }
 
     @Override
     @SessionRequired

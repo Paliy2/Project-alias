@@ -71,9 +71,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
     @Override
     public void initConfiguration() {
         super.initConfiguration();
-           
+
         final IWebUiBuilder builder = configApp();
-        
+
         builder.setDateFormat(WEB_DATE_FORMAT_JS).setTimeFormat(WEB_TIME_FORMAT).setTimeWithMillisFormat(WEB_TIME_WITH_MILLIS_FORMAT)
         .setMinTabletWidth(600);
 
@@ -82,7 +82,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
-        
+
         // Equipments Module
         final EquipmentClassWebUiConfig equipmentClassWebUiConfig = EquipmentClassWebUiConfig.register(injector(), builder);
 
@@ -98,20 +98,20 @@ public class WebUiConfig extends AbstractWebUiConfig {
         // Configure application menu
         configDesktopMainMenu()
         .addModule(Modules.USERS_AND_PERSONNEL.title)
-            .description(Modules.USERS_AND_PERSONNEL.desc)
-            .icon(Modules.USERS_AND_PERSONNEL.icon)
-            .detailIcon(Modules.USERS_AND_PERSONNEL.icon)
-            .bgColor(Modules.USERS_AND_PERSONNEL.bgColour)
-            .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
-            .menu()
-                .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
-                .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
-                    .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
-                    .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
-                    .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
-                    .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
-                .done()
-            .done().done()
+        .description(Modules.USERS_AND_PERSONNEL.desc)
+        .icon(Modules.USERS_AND_PERSONNEL.icon)
+        .detailIcon(Modules.USERS_AND_PERSONNEL.icon)
+        .bgColor(Modules.USERS_AND_PERSONNEL.bgColour)
+        .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
+        .menu()
+        .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
+        .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
+        .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
+        .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
+        .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
+        .done()
+        .done().done()
         .setLayoutFor(Device.DESKTOP, null, "[[[]]]")
         .setLayoutFor(Device.TABLET, null, "[[[]]]")
         .setLayoutFor(Device.MOBILE, null, "[[[]]]")

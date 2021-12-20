@@ -13,6 +13,6 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface EquipmentClassCo extends IEntityDao<EquipmentClass> {
 
     static final IFetchProvider<EquipmentClass> FETCH_PROVIDER = EntityUtils.fetch(EquipmentClass.class)
-    		.with("title", "desc");
+            .with("title", "desc");
 
 }

@@ -80,8 +80,8 @@ public class EquipmentClassWebUiConfig {
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
                 .addProp("this").order(1).asc().minWidth(100)
-                    .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", EquipmentClass.ENTITY_TITLE))
-                    .withAction(standardEditAction).also()
+                .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", EquipmentClass.ENTITY_TITLE))
+                .withAction(standardEditAction).also()
                 .addProp("active").minWidth(100).also()
                 .addProp("desc").minWidth(300)
                 .addPrimaryAction(standardEditAction)
@@ -97,12 +97,12 @@ public class EquipmentClassWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<EquipmentClass> createMaster(final Injector injector) {
-    	final String layout = cell(
+        final String layout = cell(
                 cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN))
-               .cell(cell(CELL_LAYOUT), FLEXIBLE_ROW), FLEXIBLE_LAYOUT_WITH_PADDING).toString();
+                .cell(cell(CELL_LAYOUT), FLEXIBLE_ROW), FLEXIBLE_LAYOUT_WITH_PADDING).toString();
 
         final IMaster<EquipmentClass> masterConfig = new SimpleMasterBuilder<EquipmentClass>().forEntity(EquipmentClass.class)
-        		.addProp("title").asSinglelineText().also()
+                .addProp("title").asSinglelineText().also()
                 .addProp("active").asCheckbox().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
