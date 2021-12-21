@@ -1,5 +1,6 @@
 package project_alias.dev_mod.util;
 
+
 import static java.lang.String.format;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -78,6 +79,7 @@ public class PopulateDb extends DomainDrivenDataPopulation {
         setupPerson(User.system_users.SU, "project.alias");
         
         co(Status.class).save(co(Status.class).new_().setTitle("Approved").setDesc("The form is approved"));
+        co(Status.class).save(co(Status.class).new_().setTitle("Disapproved").setDesc("The form is disapproved"));
 
         LOGGER.info("Completed database creation and population.");
 	}
