@@ -1,20 +1,19 @@
 package project_alias.dev_mod.util;
 
 import static java.lang.String.format;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.logging.log4j.Logger;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.H2Dialect;
 
-import static org.apache.logging.log4j.LogManager.getLogger;
-import org.apache.logging.log4j.Logger;
-
 import project_alias.config.ApplicationDomain;
+import project_alias.forms.Status;
 import project_alias.personnel.Person;
-
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.persistence.HibernateUtil;
@@ -77,6 +76,8 @@ public class PopulateDb extends DomainDrivenDataPopulation {
         
         setupUser(User.system_users.SU, "project.alias");
         setupPerson(User.system_users.SU, "project.alias");
+        
+        co(Status.class).save(co(Status.class).new_().setTitle("Approved").setDesc("The form is approved"));
 
         LOGGER.info("Completed database creation and population.");
 	}
