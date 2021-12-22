@@ -26,6 +26,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         entityTypes.addAll(PlatformDomainTypes.types);
         add(Person.class);
         add(EquipmentClass.class);
+        add(Status.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {
