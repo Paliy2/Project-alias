@@ -38,7 +38,7 @@ public class VehicleTypeTest extends AbstractDaoTestCase {
      * Each test method should be related to exactly one concern, which facilitates creation of unit tests that address a single concern.
      */
     @Test
-    public void status_can_be_created_and_saved() {
+    public void vehicle_type_can_be_created_and_saved() {
         final var status = co(VehicleType.class).new_();
         status.setTitle("Fire truck").setDesc("A regular fire truck");
         final var savedStatus = co(VehicleType.class).save(status);
