@@ -29,10 +29,15 @@ public class EquipmentTypeDao extends CommonEntityDao<EquipmentType> implements 
     }
 
     @Override
+    public EquipmentType new_() {
+        return super.new_().setActive(true);
+    }
+
+    @Override
     @SessionRequired
     @Authorise(EquipmentType_CanSave_Token.class)
     public EquipmentType save(EquipmentType entity) {
-        return super.save(entity).setActive(true);
+        return super.save(entity);
     }
 
     @Override

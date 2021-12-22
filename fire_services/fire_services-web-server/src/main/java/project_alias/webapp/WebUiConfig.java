@@ -7,8 +7,10 @@ import org.apache.commons.lang3.StringUtils;
 import project_alias.config.Modules;
 import project_alias.config.personnel.PersonWebUiConfig;
 import project_alias.equipments.EquipmentClass;
+import project_alias.equipments.EquipmentType;
 import project_alias.personnel.Person;
 import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
+import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.forms.Status;
 import project_alias.personnel.Person;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
@@ -89,6 +91,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
 
         // Equipments Module
         final EquipmentClassWebUiConfig equipmentClassWebUiConfig = EquipmentClassWebUiConfig.register(injector(), builder);
+        final EquipmentTypeWebUiConfig equipmentTypeWebUiConfig = EquipmentTypeWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration 
         configApp()
@@ -111,6 +114,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(Status.class)).description(mkMenuItemDesc(Status.class)).centre(statusWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(EquipmentType.class)).description(mkMenuItemDesc(EquipmentType.class)).centre(equipmentTypeWebUiConfig.centre).done()
         .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
         .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
         .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
