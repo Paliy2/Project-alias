@@ -38,7 +38,7 @@ public class EquipmentTypeTest extends AbstractDaoTestCase {
     }
 
     @Test
-    public void equipment_class_is_reuquired_for_equipment_type() {
+    public void equipment_class_is_required_for_equipment_type() {
         final var equipmentClass = save(new_(EquipmentClass.class).setTitle("Hose pipe").setDesc("High pressure hose for taking water to fire."));
         final var equipmentType = co(EquipmentType.class).new_().setTitle("1m hose pipe").setDesc("1 meter long hose pipe.").setEquipmentClass(equipmentClass);
         final var savedEquipmentType = co(EquipmentType.class).save(equipmentType);
