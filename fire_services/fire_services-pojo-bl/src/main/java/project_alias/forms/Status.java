@@ -40,24 +40,24 @@ public class Status extends AbstractPersistentEntity<DynamicEntityKey> {
     private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(Status.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
-    
+
     @IsProperty
-	@MapTo
-	@Title(value = "Title", desc = "A unique status title.")
-	@CompositeKeyMember(1)
+    @MapTo
+    @Title(value = "Title", desc = "A unique status title.")
+    @CompositeKeyMember(1)
     @BeforeChange(@Handler(NoWhiteSpacesValidator.class))
-	private String title;
+    private String title;
 
-	@Observable
-	public Status setTitle(final String title) {
-		this.title = title;
-		return this;
-	}
+    @Observable
+    public Status setTitle(final String title) {
+        this.title = title;
+        return this;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	
+
 
 }

@@ -85,7 +85,7 @@ public class StatusWebUiConfig {
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
                 .addProp("this").order(1).asc().width(100)
-                    .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Status.ENTITY_TITLE)).also()
+                .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Status.ENTITY_TITLE)).also()
                 .addProp("desc").minWidth(150)
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
@@ -102,9 +102,9 @@ public class StatusWebUiConfig {
      */
     private EntityMaster<Status> createMaster(final Injector injector) {
         //final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 1);
-    	final String layout = cell(
-    			cell(cell(CELL_LAYOUT)).
-    			cell(cell(CELL_LAYOUT), FLEXIBLE_ROW), FLEXIBLE_LAYOUT_WITH_PADDING).toString();
+        final String layout = cell(
+                cell(cell(CELL_LAYOUT)).
+                cell(cell(CELL_LAYOUT), FLEXIBLE_ROW), FLEXIBLE_LAYOUT_WITH_PADDING).toString();
 
         final IMaster<Status> masterConfig = new SimpleMasterBuilder<Status>().forEntity(Status.class)
                 .addProp("title").asSinglelineText().also()

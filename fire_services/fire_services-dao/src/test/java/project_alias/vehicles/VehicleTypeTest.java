@@ -39,12 +39,12 @@ public class VehicleTypeTest extends AbstractDaoTestCase {
      */
     @Test
     public void status_can_be_created_and_saved() {
-    	final var status = co(VehicleType.class).new_();
-    	status.setTitle("Fire truck").setDesc("A regular fire truck");
-    	final var savedStatus = co(VehicleType.class).save(status);
-    	assertNotNull(savedStatus);
-    	assertEquals("Fire truck", savedStatus.getTitle());
-    	assertEquals("A regular fire truck", savedStatus.getDesc());
+        final var status = co(VehicleType.class).new_();
+        status.setTitle("Fire truck").setDesc("A regular fire truck");
+        final var savedStatus = co(VehicleType.class).save(status);
+        assertNotNull(savedStatus);
+        assertEquals("Fire truck", savedStatus.getTitle());
+        assertEquals("A regular fire truck", savedStatus.getDesc());
     }
 
     @Override
@@ -60,15 +60,15 @@ public class VehicleTypeTest extends AbstractDaoTestCase {
     @Override
     protected void populateDomain() {
         // Need to invoke super to create a test user that is responsible for data population 
-    	super.populateDomain();
+        super.populateDomain();
 
-    	// Here is how the Test Case universal constants can be set.
-    	// In this case the notion of now is overridden, which makes it possible to have an invariant system-time.
-    	// However, the now value should be after AbstractDaoTestCase.prePopulateNow in order not to introduce any date-related conflicts.
-    	final UniversalConstantsForTesting constants = (UniversalConstantsForTesting) getInstance(IUniversalConstants.class);
-    	constants.setNow(dateTime("2019-10-01 11:30:00"));
+        // Here is how the Test Case universal constants can be set.
+        // In this case the notion of now is overridden, which makes it possible to have an invariant system-time.
+        // However, the now value should be after AbstractDaoTestCase.prePopulateNow in order not to introduce any date-related conflicts.
+        final UniversalConstantsForTesting constants = (UniversalConstantsForTesting) getInstance(IUniversalConstants.class);
+        constants.setNow(dateTime("2019-10-01 11:30:00"));
 
-    	// If the use of saved data population script is indicated then there is no need to proceed with any further data population logic.
+        // If the use of saved data population script is indicated then there is no need to proceed with any further data population logic.
         if (useSavedDataPopulationScript()) {
             return;
         }

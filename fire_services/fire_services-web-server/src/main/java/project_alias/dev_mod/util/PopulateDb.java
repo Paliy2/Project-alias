@@ -37,7 +37,7 @@ import ua.com.fielden.platform.utils.DbUtils;
  * 
  */
 public class PopulateDb extends DomainDrivenDataPopulation {
-	private static final Logger LOGGER = getLogger(PopulateDb.class);
+    private static final Logger LOGGER = getLogger(PopulateDb.class);
 
     private final ApplicationDomain applicationDomainProvider = new ApplicationDomain();
 
@@ -64,8 +64,8 @@ public class PopulateDb extends DomainDrivenDataPopulation {
         // Hibernate DDL generation final List<String> createDdl = DbUtils.generateSchemaByHibernate()
         final List<String> createDdl = config.getDomainMetadata().generateDatabaseDdl(dialect);
         final List<String> ddl = dialect instanceof H2Dialect ?
-                                 DbUtils.prependDropDdlForH2(createDdl) :
-                                 DbUtils.prependDropDdlForSqlServer(createDdl);
+                DbUtils.prependDropDdlForH2(createDdl) :
+                    DbUtils.prependDropDdlForSqlServer(createDdl);
         DbUtils.execSql(ddl, config.getInstance(HibernateUtil.class).getSessionFactory().getCurrentSession());
 
         final PopulateDb popDb = new PopulateDb(config, props);
@@ -75,24 +75,24 @@ public class PopulateDb extends DomainDrivenDataPopulation {
     @Override
     protected void populateDomain() {
         LOGGER.info("Creating and populating the development database...");
-        
+
         setupUser(User.system_users.SU, "project.alias");
         setupPerson(User.system_users.SU, "project.alias");
-        
+
         co(Status.class).save(co(Status.class).new_().setTitle("Approved").setDesc("The form is approved"));
         co(Status.class).save(co(Status.class).new_().setTitle("Disapproved").setDesc("The form is disapproved"));
         co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Fire truck").setDesc("The conventional fire"
-        		+ " truck escorts firefighters along with essential tools like fire extinguishers, ladders, breathing apparatuses, "
-        		+ "hydraulic rescue tools, and floodlights to the scene of a fire."));
+                + " truck escorts firefighters along with essential tools like fire extinguishers, ladders, breathing apparatuses, "
+                + "hydraulic rescue tools, and floodlights to the scene of a fire."));
         co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Heavy rescue truck").setDesc("Vehicles that get deployed to "
-        		+ "traffic collisions, building collapses, and other disasters, as well as to fires."));
+                + "traffic collisions, building collapses, and other disasters, as well as to fires."));
         co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Water tender").setDesc("A water tender (or tanker) is similar "
-        		+ "to a fire truck, but comes with a weak pump and far less hoses."));
+                + "to a fire truck, but comes with a weak pump and far less hoses."));
         co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Aerial truck").setDesc("Aerial trucks come equipped with "
-        		+ "the iconic ladder extending from the top rear of the machine. The ladder extends telescopically to reach upper stories of buildings."));
+                + "the iconic ladder extending from the top rear of the machine. The ladder extends telescopically to reach upper stories of buildings."));
 
         LOGGER.info("Completed database creation and population.");
-	}
+    }
 
     private void setupPerson(final User.system_users defaultUser, final String emailDomain) {
         final User su = co(User.class).findByKey(defaultUser.name());

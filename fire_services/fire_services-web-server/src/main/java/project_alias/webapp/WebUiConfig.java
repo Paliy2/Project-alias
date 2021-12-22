@@ -84,13 +84,13 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
-        
+
         // Forms Module
         final StatusWebUiConfig statusWebUiConfig = StatusWebUiConfig.register(injector(), builder);
 
         // Equipments Module
         final EquipmentClassWebUiConfig equipmentClassWebUiConfig = EquipmentClassWebUiConfig.register(injector(), builder);
-        
+
         // Vehicles Module
         final VehicleTypeWebUiConfig vehicleTypeWebUiConfig = VehicleTypeWebUiConfig.register(injector(), builder);
 

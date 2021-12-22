@@ -13,6 +13,6 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface StatusCo extends IEntityDao<Status> {
 
     static final IFetchProvider<Status> FETCH_PROVIDER = EntityUtils.fetch(Status.class).with(
-        "title", "desc");
+            "title", "desc");
 
 }

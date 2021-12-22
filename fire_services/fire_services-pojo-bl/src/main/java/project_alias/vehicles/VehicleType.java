@@ -41,25 +41,25 @@ public class VehicleType extends ActivatableAbstractEntity<DynamicEntityKey> {
     private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(VehicleType.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
-    
+
     @IsProperty
-	@MapTo
-	@Title(value = "Title", desc = "A unique vehicle type name")
-	@CompositeKeyMember(1)
+    @MapTo
+    @Title(value = "Title", desc = "A unique vehicle type name")
+    @CompositeKeyMember(1)
     @BeforeChange(@Handler(NoWhiteSpacesValidator.class))
-	private String title;
+    private String title;
 
-	@Observable
-	public VehicleType setTitle(final String title) {
-		this.title = title;
-		return this;
-	}
+    @Observable
+    public VehicleType setTitle(final String title) {
+        this.title = title;
+        return this;
+    }
 
-	public String getTitle() {
-		return title;
-	}
-	
-	@Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
     @Observable
     protected VehicleType setActive(boolean active) {
         super.setActive(active);

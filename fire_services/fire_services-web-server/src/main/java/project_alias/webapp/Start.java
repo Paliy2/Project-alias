@@ -19,7 +19,7 @@ import org.restlet.util.Series;
  */
 public class Start {
 
-	private static final Logger LOGGER = getLogger(Start.class);
+    private static final Logger LOGGER = getLogger(Start.class);
 
     public static void main(final String[] args) throws IOException {
         final String fileName = args.length == 1 ? args[0] : "application.properties";

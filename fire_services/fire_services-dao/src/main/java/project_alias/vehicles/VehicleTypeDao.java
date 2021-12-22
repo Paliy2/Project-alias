@@ -23,39 +23,39 @@ import ua.com.fielden.platform.entity.annotation.EntityType;
 @EntityType(VehicleType.class)
 public class VehicleTypeDao extends CommonEntityDao<VehicleType> implements VehicleTypeCo {
 
-	@Inject
-	public VehicleTypeDao(final IFilter filter) {
-		super(filter);
-	}
+    @Inject
+    public VehicleTypeDao(final IFilter filter) {
+        super(filter);
+    }
 
-	@Override
-	public VehicleType new_() {
-		return super.new_().setActive(true);
-	}
+    @Override
+    public VehicleType new_() {
+        return super.new_().setActive(true);
+    }
 
-	@Override
-	@SessionRequired
-	@Authorise(VehicleType_CanSave_Token.class)
-	public VehicleType save(VehicleType entity) {
-		return super.save(entity);
-	}
+    @Override
+    @SessionRequired
+    @Authorise(VehicleType_CanSave_Token.class)
+    public VehicleType save(VehicleType entity) {
+        return super.save(entity);
+    }
 
-	@Override
-	@SessionRequired
-	@Authorise(VehicleType_CanDelete_Token.class)
-	public int batchDelete(final Collection<Long> entitiesIds) {
-		return defaultBatchDelete(entitiesIds);
-	}
+    @Override
+    @SessionRequired
+    @Authorise(VehicleType_CanDelete_Token.class)
+    public int batchDelete(final Collection<Long> entitiesIds) {
+        return defaultBatchDelete(entitiesIds);
+    }
 
-	@Override
-	@SessionRequired
-	@Authorise(VehicleType_CanDelete_Token.class)
-	public int batchDelete(final List<VehicleType> entities) {
-		return defaultBatchDelete(entities);
-	}
+    @Override
+    @SessionRequired
+    @Authorise(VehicleType_CanDelete_Token.class)
+    public int batchDelete(final List<VehicleType> entities) {
+        return defaultBatchDelete(entities);
+    }
 
-	@Override
-	protected IFetchProvider<VehicleType> createFetchProvider() {
-		return FETCH_PROVIDER;
-	}
+    @Override
+    protected IFetchProvider<VehicleType> createFetchProvider() {
+        return FETCH_PROVIDER;
+    }
 }

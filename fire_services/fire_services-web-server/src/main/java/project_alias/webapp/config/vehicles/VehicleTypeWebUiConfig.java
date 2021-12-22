@@ -65,7 +65,7 @@ public class VehicleTypeWebUiConfig {
      */
     private EntityCentre<VehicleType> createCentre(final Injector injector, final IWebUiBuilder builder) {
         final String layout = LayoutComposer.mkGridForCentre(1, 3);
-    	
+
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(VehicleType.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(VehicleType.class);
         final EntityActionConfig standardExportAction = StandardActions.EXPORT_ACTION.mkAction(VehicleType.class);
@@ -88,7 +88,7 @@ public class VehicleTypeWebUiConfig {
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
                 .addProp("this").order(1).asc().width(75)
-                    .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", VehicleType.ENTITY_TITLE)).also()
+                .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", VehicleType.ENTITY_TITLE)).also()
                 .addProp("desc").minWidth(100).also()
                 .addProp("active").width(25)
                 .addPrimaryAction(standardEditAction)
@@ -105,10 +105,10 @@ public class VehicleTypeWebUiConfig {
      */
     private EntityMaster<VehicleType> createMaster(final Injector injector) {
         // final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
-    	final String layout = cell(
-    	cell(cell(CELL_LAYOUT)).
-    	cell(cell(CELL_LAYOUT)).
-    	cell(cell(CELL_LAYOUT), FLEXIBLE_ROW), FLEXIBLE_LAYOUT_WITH_PADDING).toString();
+        final String layout = cell(
+                cell(cell(CELL_LAYOUT)).
+                cell(cell(CELL_LAYOUT)).
+                cell(cell(CELL_LAYOUT), FLEXIBLE_ROW), FLEXIBLE_LAYOUT_WITH_PADDING).toString();
 
         final IMaster<VehicleType> masterConfig = new SimpleMasterBuilder<VehicleType>().forEntity(VehicleType.class)
                 .addProp("title").asSinglelineText().also()
