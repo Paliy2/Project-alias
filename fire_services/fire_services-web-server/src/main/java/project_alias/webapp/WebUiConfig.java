@@ -7,13 +7,14 @@ import org.apache.commons.lang3.StringUtils;
 import project_alias.config.Modules;
 import project_alias.config.personnel.PersonWebUiConfig;
 import project_alias.equipments.EquipmentClass;
-import project_alias.equipments.EquipmentType;
-import project_alias.personnel.Person;
-import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
+<<<<<<< issue-#7import project_alias.equipments.EquipmentType;
 import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.forms.Status;
 import project_alias.personnel.Person;
+import project_alias.vehicles.VehicleType;
+import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
+import project_alias.webapp.config.vehicles.VehicleTypeWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
@@ -85,13 +86,16 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
-        
+
         // Forms Module
         final StatusWebUiConfig statusWebUiConfig = StatusWebUiConfig.register(injector(), builder);
 
         // Equipments Module
         final EquipmentClassWebUiConfig equipmentClassWebUiConfig = EquipmentClassWebUiConfig.register(injector(), builder);
         final EquipmentTypeWebUiConfig equipmentTypeWebUiConfig = EquipmentTypeWebUiConfig.register(injector(), builder);
+
+        // Vehicles Module
+        final VehicleTypeWebUiConfig vehicleTypeWebUiConfig = VehicleTypeWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration 
         configApp()
@@ -114,6 +118,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(Status.class)).description(mkMenuItemDesc(Status.class)).centre(statusWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(VehicleType.class)).description(mkMenuItemDesc(VehicleType.class)).centre(vehicleTypeWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(EquipmentType.class)).description(mkMenuItemDesc(EquipmentType.class)).centre(equipmentTypeWebUiConfig.centre).done()
         .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
         .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
