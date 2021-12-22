@@ -9,6 +9,9 @@ import project_alias.config.personnel.PersonWebUiConfig;
 import project_alias.equipments.EquipmentClass;
 import project_alias.personnel.Person;
 import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
+import project_alias.forms.Status;
+import project_alias.personnel.Person;
+import project_alias.webapp.config.forms.StatusWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
@@ -107,10 +110,10 @@ public class WebUiConfig extends AbstractWebUiConfig {
         .menu()
         .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(Status.class)).description(mkMenuItemDesc(Status.class)).centre(statusWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
         .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
         .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
         .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
-        .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
         .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
         .done()
         .done().done()

@@ -11,6 +11,7 @@ import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import project_alias.equipments.EquipmentClass;
+import project_alias.forms.Status;
 
 /**
  * A class to register domain entities.
