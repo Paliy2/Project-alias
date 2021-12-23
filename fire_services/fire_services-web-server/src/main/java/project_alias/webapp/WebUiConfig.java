@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import project_alias.config.Modules;
 import project_alias.config.personnel.PersonWebUiConfig;
 import project_alias.equipments.EquipmentClass;
-<<<<<<< issue-#7import project_alias.equipments.EquipmentType;
+import project_alias.equipments.EquipmentType;
 import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.forms.Status;
 import project_alias.personnel.Person;
