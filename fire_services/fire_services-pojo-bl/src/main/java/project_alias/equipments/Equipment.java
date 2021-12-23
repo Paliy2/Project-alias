@@ -2,6 +2,7 @@ package project_alias.equipments;
 
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import project_alias.validators.NoWhiteSpacesValidator;
+import project_alias.vehicles.Vehicle;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
@@ -65,15 +66,15 @@ public class Equipment extends ActivatableAbstractEntity<DynamicEntityKey> {
     @IsProperty
     @MapTo
     @Title(value = "Vehicle", desc = "A vehicle this equipment belongs to.")
-    private String vehicle;
+    private Vehicle vehicle;
 
     @Observable
-    public Equipment setVehicle(final String vehicle) {
+    public Equipment setVehicle(final Vehicle vehicle) {
         this.vehicle = vehicle;
         return this;
     }
 
-    public String getVehicle() {
+    public Vehicle getVehicle() {
         return vehicle;
     }
 

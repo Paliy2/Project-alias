@@ -17,6 +17,9 @@ import org.junit.Test;
 
 import project_alias.test_config.AbstractDaoTestCase;
 import project_alias.validators.NoWhiteSpacesValidator;
+import project_alias.vehicles.Vehicle;
+import project_alias.vehicles.VehicleCo;
+import project_alias.vehicles.VehicleType;
 
 
 /**
@@ -30,22 +33,24 @@ public class EquipmentTest extends AbstractDaoTestCase {
     @Test
     public void equipment_can_be_created_and_saved() {
         final var equipmentType = co(EquipmentType.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<EquipmentType>fetchFor("equipmentType").fetchModel(), "1m hose pipe");
-        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle("MAN").setDesc("A tube for conveying fluid substances.");
+        final var vehicle = co(Vehicle.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<Vehicle>fetchFor("vehicle").fetchModel(), "AA9999AA");
+        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle(vehicle).setDesc("A tube for conveying fluid substances.");
         assertEquals("Pipe", equipment.getTitle());
         assertEquals(equipmentType, equipment.getEquipmentType());
-        assertEquals("MAN", equipment.getVehicle());
+        assertEquals(vehicle, equipment.getVehicle());
         final var savedEquipment = co(Equipment.class).save(equipment);
         assertNotNull(savedEquipment);
         assertTrue(savedEquipment.isActive());
         assertEquals("Pipe", savedEquipment.getTitle());
         assertEquals(equipmentType, savedEquipment.getEquipmentType());
-        assertEquals("MAN", savedEquipment.getVehicle());
+        assertEquals(vehicle, savedEquipment.getVehicle());
     }
 
     @Test
     public void new_equipment_gets_its_number_generated() {
         final var equipmentType = co(EquipmentType.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<EquipmentType>fetchFor("equipmentType").fetchModel(), "1m hose pipe");
-        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle("MAN").setDesc("A tube for conveying fluid substances.");
+        final var vehicle = co(Vehicle.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<Vehicle>fetchFor("vehicle").fetchModel(), "AA9999AA");
+        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle(vehicle).setDesc("A tube for conveying fluid substances.");
         assertEquals(EquipmentCo.DEFAULT_KEY_VALUE, equipment.getNumber());
 
         final var savedEquipment = co(Equipment.class).save(equipment);
@@ -57,7 +62,8 @@ public class EquipmentTest extends AbstractDaoTestCase {
     @Test
     public void existing_equipment_can_not_have_its_number_changed() {
         final var equipmentType = co(EquipmentType.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<EquipmentType>fetchFor("equipmentType").fetchModel(), "1m hose pipe");
-        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle("MAN").setDesc("A tube for conveying fluid substances.");
+        final var vehicle = co(Vehicle.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<Vehicle>fetchFor("vehicle").fetchModel(), "AA9999AA");
+        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle(vehicle).setDesc("A tube for conveying fluid substances.");
 
         final var savedEquipment = co(Equipment.class).save(equipment);
         savedEquipment.setNumber("2");
@@ -67,7 +73,8 @@ public class EquipmentTest extends AbstractDaoTestCase {
     @Test
     public void title_can_not_contain_whitespaces() {
         final var equipmentType = co(EquipmentType.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<EquipmentType>fetchFor("equipmentType").fetchModel(), "1m hose pipe");
-        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle("MAN").setDesc("A tube for conveying fluid substances.");
+        final var vehicle = co(Vehicle.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<Vehicle>fetchFor("vehicle").fetchModel(), "AA9999AA");
+        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle(vehicle).setDesc("A tube for conveying fluid substances.");
 
         // No whitespace between words.
         equipment.setTitle("Pi  pe");
@@ -97,7 +104,8 @@ public class EquipmentTest extends AbstractDaoTestCase {
     @Test
     public void equipment_type_is_required_for_equipment() {
         final var equipmentType = co(EquipmentType.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<EquipmentType>fetchFor("equipmentType").fetchModel(), "1m hose pipe");
-        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setEquipmentType(equipmentType).setVehicle("MAN").setDesc("A tube for conveying fluid substances.");
+        final var vehicle = co(Vehicle.class).findByKeyAndFetch(EquipmentCo.FETCH_PROVIDER.<Vehicle>fetchFor("vehicle").fetchModel(), "AA9999AA");
+        final var equipment = co(Equipment.class).new_().setTitle("Pipe").setVehicle(vehicle).setEquipmentType(equipmentType).setDesc("A tube for conveying fluid substances.");
         final var savedEquipment = co(Equipment.class).save(equipment);
         final var mpEquipmentType = savedEquipment.getProperty("equipmentType");  
         savedEquipment.setEquipmentType(null);
@@ -111,7 +119,7 @@ public class EquipmentTest extends AbstractDaoTestCase {
 
     @Override
     public boolean useSavedDataPopulationScript() {
-        return true;
+        return false;
     }
 
     @Override
@@ -133,6 +141,10 @@ public class EquipmentTest extends AbstractDaoTestCase {
 
         save(new_(EquipmentType.class).setTitle("1m hose pipe").setDesc("1 meter long hose pipe.").setEquipmentClass(ec1));
         save(new_(EquipmentType.class).setTitle("Assault ladder").setDesc("Ladder for assaults.").setEquipmentClass(ec2));
+
+        final VehicleType vehicleType = save(new_(VehicleType.class).setTitle("Fire truck").setDesc("A regular fire truck"));
+        save(new_(Vehicle.class).setNumber("AA9999AA").setModel("MAN (TGM12.240)").setVehicleType(vehicleType));
+
     }
 
 }

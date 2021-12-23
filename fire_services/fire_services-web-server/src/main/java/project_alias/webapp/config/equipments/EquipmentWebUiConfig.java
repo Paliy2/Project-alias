@@ -24,6 +24,7 @@ import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
 import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
 import project_alias.main.menu.equipments.MiEquipment;
+import project_alias.vehicles.Vehicle;
 import ua.com.fielden.platform.web.centre.EntityCentre;
 import ua.com.fielden.platform.web.view.master.EntityMaster;
 import static ua.com.fielden.platform.web.PrefDim.mkDim;
@@ -77,7 +78,7 @@ public class EquipmentWebUiConfig {
                 .addCrit("active").asMulti().bool().also()
                 .addCrit("title").asMulti().text().also() 
                 .addCrit("equipmentType").asMulti().autocompleter(EquipmentType.class).also()
-                .addCrit("vehicle").asMulti().text()
+                .addCrit("vehicle").asMulti().autocompleter(Vehicle.class)
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -112,7 +113,7 @@ public class EquipmentWebUiConfig {
                 .addProp("title").asSinglelineText().also()
                 .addProp("active").asCheckbox().also()
                 .addProp("equipmentType").asAutocompleter().also()
-                .addProp("vehicle").asSinglelineText().also()
+                .addProp("vehicle").asAutocompleter().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
