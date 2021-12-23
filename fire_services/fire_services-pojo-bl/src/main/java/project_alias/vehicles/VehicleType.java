@@ -1,7 +1,8 @@
-package project_alias.forms;
+package project_alias.vehicles;
 
+import project_alias.equipments.EquipmentClass;
 import project_alias.validators.NoWhiteSpacesValidator;
-import ua.com.fielden.platform.entity.AbstractPersistentEntity;
+import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
@@ -22,34 +23,34 @@ import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 
 /**
- * An entity for setting different statuses on forms.
+ * An entity for classification of vehicles
  *
  * @author Developers
  *
  */
 @KeyType(DynamicEntityKey.class)
-@KeyTitle("Status")
-@CompanionObject(StatusCo.class)
+@KeyTitle("Vehicle Type")
+@CompanionObject(VehicleTypeCo.class)
 @MapEntityTo
 @DescTitle("Description")
 @DisplayDescription
 @DescRequired
-@EntityTitle(value = "Status", desc = "Used for setting different statuses on forms.")
-public class Status extends AbstractPersistentEntity<DynamicEntityKey> {
+@EntityTitle(value = "Vehicle Type", desc = "Used for classification of vehicles.")
+public class VehicleType extends ActivatableAbstractEntity<DynamicEntityKey> {
 
-    private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(Status.class);
+    private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(VehicleType.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
 
     @IsProperty
     @MapTo
-    @Title(value = "Title", desc = "A unique status title.")
+    @Title(value = "Title", desc = "A unique vehicle type name")
     @CompositeKeyMember(1)
     @BeforeChange(@Handler(NoWhiteSpacesValidator.class))
     private String title;
 
     @Observable
-    public Status setTitle(final String title) {
+    public VehicleType setTitle(final String title) {
         this.title = title;
         return this;
     }
@@ -58,6 +59,10 @@ public class Status extends AbstractPersistentEntity<DynamicEntityKey> {
         return title;
     }
 
-
-
+    @Override
+    @Observable
+    protected VehicleType setActive(boolean active) {
+        super.setActive(active);
+        return this;
+    }
 }

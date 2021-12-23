@@ -12,8 +12,10 @@ import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import project_alias.equipments.EquipmentClass;
 import project_alias.forms.Status;
+import project_alias.vehicles.VehicleType;
 import project_alias.equipments.EquipmentType;
 import project_alias.equipments.Equipment;
+import project_alias.vehicles.Vehicle;
 
 /**
  * A class to register domain entities.
@@ -30,8 +32,10 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(Person.class);
         add(EquipmentClass.class);
         add(Status.class);
+        add(VehicleType.class);
         add(EquipmentType.class);
         add(Equipment.class);
+        add(Vehicle.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {

@@ -1,8 +1,5 @@
-package project_alias.webapp.config.forms;
+package project_alias.webapp.config.vehicles;
 
-
-import static project_alias.common.LayoutComposer.*;
-import static ua.com.fielden.platform.web.layout.api.impl.LayoutBuilder.cell;
 import static java.lang.String.format;
 import static project_alias.common.StandardActionsStyles.MASTER_CANCEL_ACTION_LONG_DESC;
 import static project_alias.common.StandardActionsStyles.MASTER_CANCEL_ACTION_SHORT_DESC;
@@ -14,7 +11,8 @@ import java.util.Optional;
 
 import com.google.inject.Injector;
 
-import project_alias.forms.Status;
+import project_alias.vehicles.Vehicle;
+import project_alias.vehicles.VehicleType;
 import project_alias.common.LayoutComposer;
 import project_alias.common.StandardActions;
 
@@ -27,28 +25,28 @@ import ua.com.fielden.platform.web.view.master.api.actions.MasterActions;
 import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
 import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
-import project_alias.main.menu.forms.MiStatus;
+import project_alias.main.menu.vehicles.MiVehicle;
 import ua.com.fielden.platform.web.centre.EntityCentre;
 import ua.com.fielden.platform.web.view.master.EntityMaster;
 import static ua.com.fielden.platform.web.PrefDim.mkDim;
 import ua.com.fielden.platform.web.PrefDim.Unit;
 
 /**
- * {@link Status} Web UI configuration.
+ * {@link Vehicle} Web UI configuration.
  *
  * @author Developers
  *
  */
-public class StatusWebUiConfig {
+public class VehicleWebUiConfig {
 
-    public final EntityCentre<Status> centre;
-    public final EntityMaster<Status> master;
+    public final EntityCentre<Vehicle> centre;
+    public final EntityMaster<Vehicle> master;
 
-    public static StatusWebUiConfig register(final Injector injector, final IWebUiBuilder builder) {
-        return new StatusWebUiConfig(injector, builder);
+    public static VehicleWebUiConfig register(final Injector injector, final IWebUiBuilder builder) {
+        return new VehicleWebUiConfig(injector, builder);
     }
 
-    private StatusWebUiConfig(final Injector injector, final IWebUiBuilder builder) {
+    private VehicleWebUiConfig(final Injector injector, final IWebUiBuilder builder) {
         centre = createCentre(injector, builder);
         builder.register(centre);
         master = createMaster(injector);
@@ -56,58 +54,66 @@ public class StatusWebUiConfig {
     }
 
     /**
-     * Creates entity centre for {@link Status}.
+     * Creates entity centre for {@link Vehicle}.
      *
      * @param injector
      * @return created entity centre
      */
-    private EntityCentre<Status> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+    private EntityCentre<Vehicle> createCentre(final Injector injector, final IWebUiBuilder builder) {
+        final String layout = LayoutComposer.mkGridForCentre(3, 2);
 
-        final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Status.class);
-        final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Status.class);
-        final EntityActionConfig standardExportAction = StandardActions.EXPORT_ACTION.mkAction(Status.class);
-        final EntityActionConfig standardEditAction = StandardActions.EDIT_ACTION.mkAction(Status.class);
+        final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Vehicle.class);
+        final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Vehicle.class);
+        final EntityActionConfig standardExportAction = StandardActions.EXPORT_ACTION.mkAction(Vehicle.class);
+        final EntityActionConfig standardEditAction = StandardActions.EDIT_ACTION.mkAction(Vehicle.class);
         final EntityActionConfig standardSortAction = CentreConfigActions.CUSTOMISE_COLUMNS_ACTION.mkAction();
-        builder.registerOpenMasterAction(Status.class, standardEditAction);
+        builder.registerOpenMasterAction(Vehicle.class, standardEditAction);
 
-        final EntityCentreConfig<Status> ecc = EntityCentreBuilder.centreFor(Status.class)
+        final EntityCentreConfig<Vehicle> ecc = EntityCentreBuilder.centreFor(Vehicle.class)
                 //.runAutomatically()
                 .addFrontAction(standardNewAction)
                 .addTopAction(standardNewAction).also()
                 .addTopAction(standardDeleteAction).also()
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
-                .addCrit("this").asMulti().autocompleter(Status.class).also()
+                .addCrit("this").asMulti().autocompleter(Vehicle.class).also()
+                .addCrit("active").asMulti().bool().also()
+                .addCrit("model").asMulti().text().also()
+                .addCrit("vehicleType").asMulti().autocompleter(VehicleType.class).also()
+                .addCrit("assignedDriver").asMulti().text().also()
                 .addCrit("desc").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
-                .addProp("this").order(1).asc().width(100)
-                .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Status.ENTITY_TITLE)).also()
-                .addProp("desc").minWidth(150)
-                //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
+                .addProp("this").order(1).asc().width(130)
+                .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Vehicle.ENTITY_TITLE)).also()
+                .addProp("active").width(70).also()
+                .addProp("model").minWidth(100).also()
+                .addProp("vehicleType").minWidth(100).also()
+                .addProp("assignedDriver").minWidth(100).also()
+                .addProp("desc").minWidth(100)
                 .addPrimaryAction(standardEditAction)
                 .build();
 
-        return new EntityCentre<>(MiStatus.class, ecc, injector);
+        return new EntityCentre<>(MiVehicle.class, ecc, injector);
     }
 
     /**
-     * Creates entity master for {@link Status}.
+     * Creates entity master for {@link Vehicle}.
      *
      * @param injector
      * @return created entity master
      */
-    private EntityMaster<Status> createMaster(final Injector injector) {
-        //final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 1);
-        final String layout = cell(
-                cell(cell(CELL_LAYOUT)).
-                cell(cell(CELL_LAYOUT), FLEXIBLE_ROW), FLEXIBLE_LAYOUT_WITH_PADDING).toString();
+    private EntityMaster<Vehicle> createMaster(final Injector injector) {
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(3, 2);
 
-        final IMaster<Status> masterConfig = new SimpleMasterBuilder<Status>().forEntity(Status.class)
-                .addProp("title").asSinglelineText().also()
+        final IMaster<Vehicle> masterConfig = new SimpleMasterBuilder<Vehicle>().forEntity(Vehicle.class)
+                .addProp("number").asSinglelineText().also()
+                .addProp("active").asCheckbox().also()
+                .addProp("model").asMultilineText().also()
+                .addProp("vehicleType").asAutocompleter().also()
+                .addProp("assignedDriver").asMultilineText().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc(MASTER_CANCEL_ACTION_SHORT_DESC).longDesc(MASTER_CANCEL_ACTION_LONG_DESC)
                 .addAction(MasterActions.SAVE).shortDesc(MASTER_SAVE_ACTION_SHORT_DESC).longDesc(MASTER_SAVE_ACTION_LONG_DESC)
@@ -115,9 +121,9 @@ public class StatusWebUiConfig {
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
-                .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 280, Unit.PX))
+                .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 440, Unit.PX))
                 .done();
 
-        return new EntityMaster<>(Status.class, masterConfig, injector);
+        return new EntityMaster<>(Vehicle.class, masterConfig, injector);
     }
 }

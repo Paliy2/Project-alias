@@ -1,4 +1,4 @@
-package project_alias.forms;
+package project_alias.vehicles;
 
 import static org.junit.Assert.*;
 import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.fetch;
@@ -23,12 +23,12 @@ import project_alias.test_config.AbstractDaoTestCase;
 
 
 /**
- * Basic testing of {@link Status}
+ * Basic testing of {@link VehicleType}
  * 
  * @author Generated
  *
  */
-public class StatusTest extends AbstractDaoTestCase {
+public class VehicleTypeTest extends AbstractDaoTestCase {
 
     /**
      * The names of the test method should be informative. 
@@ -38,13 +38,13 @@ public class StatusTest extends AbstractDaoTestCase {
      * Each test method should be related to exactly one concern, which facilitates creation of unit tests that address a single concern.
      */
     @Test
-    public void status_can_be_created_and_saved() {
-        final var status = co(Status.class).new_();
-        status.setTitle("Approved").setDesc("The form is approved");
-        final var savedStatus = co(Status.class).save(status);
-        assertNotNull(savedStatus);
-        assertEquals("Approved", savedStatus.getTitle());
-        assertEquals("The form is approved", savedStatus.getDesc());
+    public void vehicle_type_can_be_created_and_saved() {
+        final var vehicleType = co(VehicleType.class).new_();
+        vehicleType.setTitle("Fire truck").setDesc("A regular fire truck");
+        final var savedVehicleType = co(VehicleType.class).save(vehicleType);
+        assertNotNull(savedVehicleType);
+        assertEquals("Fire truck", savedVehicleType.getTitle());
+        assertEquals("A regular fire truck", savedVehicleType.getDesc());
     }
 
     @Override

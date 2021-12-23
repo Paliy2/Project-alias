@@ -9,13 +9,18 @@ import project_alias.config.personnel.PersonWebUiConfig;
 import project_alias.equipments.Equipment;
 import project_alias.equipments.EquipmentClass;
 import project_alias.equipments.EquipmentType;
+import project_alias.forms.Status;
 import project_alias.personnel.Person;
+import project_alias.vehicles.Vehicle;
+import project_alias.vehicles.VehicleType;
 import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentWebUiConfig;
 import project_alias.forms.Status;
 import project_alias.personnel.Person;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
+import project_alias.webapp.config.vehicles.VehicleTypeWebUiConfig;
+import project_alias.webapp.config.vehicles.VehicleWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
@@ -96,6 +101,10 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final EquipmentTypeWebUiConfig equipmentTypeWebUiConfig = EquipmentTypeWebUiConfig.register(injector(), builder);
         final EquipmentWebUiConfig equipmentWebUiConfig = EquipmentWebUiConfig.register(injector(), builder);
 
+        // Vehicles Module
+        final VehicleTypeWebUiConfig vehicleTypeWebUiConfig = VehicleTypeWebUiConfig.register(injector(), builder);
+        final VehicleWebUiConfig vehicleWebUiConfig = VehicleWebUiConfig.register(injector(), builder);
+
         // Add user-rated masters and centres to the configuration 
         configApp()
         .addMaster(userWebUiConfig.master)
@@ -117,8 +126,10 @@ public class WebUiConfig extends AbstractWebUiConfig {
         .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(Status.class)).description(mkMenuItemDesc(Status.class)).centre(statusWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(VehicleType.class)).description(mkMenuItemDesc(VehicleType.class)).centre(vehicleTypeWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(EquipmentType.class)).description(mkMenuItemDesc(EquipmentType.class)).centre(equipmentTypeWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(Equipment.class)).description(mkMenuItemDesc(Equipment.class)).centre(equipmentWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(Vehicle.class)).description(mkMenuItemDesc(Vehicle.class)).centre(vehicleWebUiConfig.centre).done()
         .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
         .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
         .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
