@@ -23,7 +23,7 @@ import project_alias.test_config.AbstractDaoTestCase;
 
 
 /**
- * Basic testing of {@link Status}
+ * Basic testing of {@link VehicleType}
  * 
  * @author Generated
  *
@@ -39,12 +39,12 @@ public class VehicleTypeTest extends AbstractDaoTestCase {
      */
     @Test
     public void vehicle_type_can_be_created_and_saved() {
-        final var status = co(VehicleType.class).new_();
-        status.setTitle("Fire truck").setDesc("A regular fire truck");
-        final var savedStatus = co(VehicleType.class).save(status);
-        assertNotNull(savedStatus);
-        assertEquals("Fire truck", savedStatus.getTitle());
-        assertEquals("A regular fire truck", savedStatus.getDesc());
+        final var vehicleType = co(VehicleType.class).new_();
+        vehicleType.setTitle("Fire truck").setDesc("A regular fire truck");
+        final var savedVehicleType = co(VehicleType.class).save(vehicleType);
+        assertNotNull(savedVehicleType);
+        assertEquals("Fire truck", savedVehicleType.getTitle());
+        assertEquals("A regular fire truck", savedVehicleType.getDesc());
     }
 
     @Override
