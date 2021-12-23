@@ -14,6 +14,7 @@ import project_alias.equipments.EquipmentClass;
 import project_alias.forms.Status;
 import project_alias.vehicles.VehicleType;
 import project_alias.equipments.EquipmentType;
+import project_alias.vehicles.Vehicle;
 
 /**
  * A class to register domain entities.
@@ -32,6 +33,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(Status.class);
         add(VehicleType.class);
         add(EquipmentType.class);
+        add(Vehicle.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {

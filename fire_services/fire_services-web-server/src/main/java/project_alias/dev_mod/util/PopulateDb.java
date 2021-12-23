@@ -15,6 +15,7 @@ import org.hibernate.dialect.H2Dialect;
 import project_alias.config.ApplicationDomain;
 import project_alias.forms.Status;
 import project_alias.personnel.Person;
+import project_alias.vehicles.Vehicle;
 import project_alias.vehicles.VehicleType;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
@@ -81,7 +82,7 @@ public class PopulateDb extends DomainDrivenDataPopulation {
 
         co(Status.class).save(co(Status.class).new_().setTitle("Approved").setDesc("The form is approved"));
         co(Status.class).save(co(Status.class).new_().setTitle("Disapproved").setDesc("The form is disapproved"));
-        co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Fire truck").setDesc("The conventional fire"
+        final var vehicleType = co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Fire truck").setDesc("The conventional fire"
                 + " truck escorts firefighters along with essential tools like fire extinguishers, ladders, breathing apparatuses, "
                 + "hydraulic rescue tools, and floodlights to the scene of a fire."));
         co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Heavy rescue truck").setDesc("Vehicles that get deployed to "
@@ -90,7 +91,9 @@ public class PopulateDb extends DomainDrivenDataPopulation {
                 + "to a fire truck, but comes with a weak pump and far less hoses."));
         co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Aerial truck").setDesc("Aerial trucks come equipped with "
                 + "the iconic ladder extending from the top rear of the machine. The ladder extends telescopically to reach upper stories of buildings."));
-
+        co(Vehicle.class).save(co(Vehicle.class).new_().
+                setNumber("AA8888AA").setModel("MAN (TGM12.240)").setVehicleType(vehicleType));
+        
         LOGGER.info("Completed database creation and population.");
     }
 
