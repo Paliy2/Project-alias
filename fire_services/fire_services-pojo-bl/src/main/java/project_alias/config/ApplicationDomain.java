@@ -14,6 +14,7 @@ import project_alias.equipments.EquipmentClass;
 import project_alias.forms.Status;
 import project_alias.vehicles.VehicleType;
 import project_alias.equipments.EquipmentType;
+import project_alias.equipments.Equipment;
 import project_alias.vehicles.Vehicle;
 
 /**
@@ -33,6 +34,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(Status.class);
         add(VehicleType.class);
         add(EquipmentType.class);
+        add(Equipment.class);
         add(Vehicle.class);
     }
 
