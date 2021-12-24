@@ -131,7 +131,7 @@ public class EquipmentClassWebUiConfig {
 
     private EntityCentre<EquipmentType> createEquipmentTypeCentre() {
         final Class<EquipmentType> root = EquipmentType.class;
-        final String layout = LayoutComposer.mkVarGridForCentre(2, 1);
+        final String layout = LayoutComposer.mkVarGridForCentre(2);
 
         final EntityActionConfig standardEditAction = StandardActions.EDIT_ACTION.mkAction(EquipmentType.class);
         final EntityActionConfig standardNewAction = StandardActions.NEW_WITH_MASTER_ACTION.mkAction(EquipmentType.class);
@@ -191,8 +191,7 @@ public class EquipmentClassWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(EquipmentClass.class).also()
-                .addCrit("active").asMulti().bool().also()
-                .addCrit("desc").asMulti().text()
+                .addCrit("active").asMulti().bool()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
