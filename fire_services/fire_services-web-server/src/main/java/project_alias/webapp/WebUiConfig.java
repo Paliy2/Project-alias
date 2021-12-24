@@ -6,20 +6,31 @@ import org.apache.commons.lang3.StringUtils;
 
 import project_alias.config.Modules;
 import project_alias.config.personnel.PersonWebUiConfig;
+import project_alias.equipments.Equipment;
+import project_alias.equipments.EquipmentClass;
+import project_alias.equipments.EquipmentType;
+import project_alias.forms.Status;
 import project_alias.personnel.Person;
-
+import project_alias.vehicles.Vehicle;
+import project_alias.vehicles.VehicleType;
+import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
+import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
+import project_alias.webapp.config.equipments.EquipmentWebUiConfig;
+import project_alias.forms.Status;
+import project_alias.personnel.Person;
+import project_alias.webapp.config.forms.StatusWebUiConfig;
+import project_alias.webapp.config.vehicles.VehicleTypeWebUiConfig;
+import project_alias.webapp.config.vehicles.VehicleWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
+import ua.com.fielden.platform.entity.AbstractEntity;
+import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
-
-import ua.com.fielden.platform.entity.AbstractEntity;
-import ua.com.fielden.platform.reflection.TitlesDescsGetter;
-
 import ua.com.fielden.platform.web.resources.webui.AbstractWebUiConfig;
+import ua.com.fielden.platform.web.resources.webui.SecurityMatrixWebUiConfig;
 import ua.com.fielden.platform.web.resources.webui.UserRoleWebUiConfig;
 import ua.com.fielden.platform.web.resources.webui.UserWebUiConfig;
-import ua.com.fielden.platform.web.resources.webui.SecurityMatrixWebUiConfig;
 
 /**
  * App-specific {@link IWebApp} implementation.
@@ -70,9 +81,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
     @Override
     public void initConfiguration() {
         super.initConfiguration();
-           
+
         final IWebUiBuilder builder = configApp();
-        
+
         builder.setDateFormat(WEB_DATE_FORMAT_JS).setTimeFormat(WEB_TIME_FORMAT).setTimeWithMillisFormat(WEB_TIME_WITH_MILLIS_FORMAT)
         .setMinTabletWidth(600);
 
@@ -81,6 +92,18 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
+
+        // Forms Module
+        final StatusWebUiConfig statusWebUiConfig = StatusWebUiConfig.register(injector(), builder);
+
+        // Equipments Module
+        final EquipmentClassWebUiConfig equipmentClassWebUiConfig = EquipmentClassWebUiConfig.register(injector(), builder);
+        final EquipmentTypeWebUiConfig equipmentTypeWebUiConfig = EquipmentTypeWebUiConfig.register(injector(), builder);
+        final EquipmentWebUiConfig equipmentWebUiConfig = EquipmentWebUiConfig.register(injector(), builder);
+
+        // Vehicles Module
+        final VehicleTypeWebUiConfig vehicleTypeWebUiConfig = VehicleTypeWebUiConfig.register(injector(), builder);
+        final VehicleWebUiConfig vehicleWebUiConfig = VehicleWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration 
         configApp()
@@ -94,19 +117,25 @@ public class WebUiConfig extends AbstractWebUiConfig {
         // Configure application menu
         configDesktopMainMenu()
         .addModule(Modules.USERS_AND_PERSONNEL.title)
-            .description(Modules.USERS_AND_PERSONNEL.desc)
-            .icon(Modules.USERS_AND_PERSONNEL.icon)
-            .detailIcon(Modules.USERS_AND_PERSONNEL.icon)
-            .bgColor(Modules.USERS_AND_PERSONNEL.bgColour)
-            .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
-            .menu()
-                .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
-                .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
-                    .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
-                    .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
-                    .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
-                .done()
-            .done().done()
+        .description(Modules.USERS_AND_PERSONNEL.desc)
+        .icon(Modules.USERS_AND_PERSONNEL.icon)
+        .detailIcon(Modules.USERS_AND_PERSONNEL.icon)
+        .bgColor(Modules.USERS_AND_PERSONNEL.bgColour)
+        .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
+        .menu()
+        .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(Status.class)).description(mkMenuItemDesc(Status.class)).centre(statusWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(VehicleType.class)).description(mkMenuItemDesc(VehicleType.class)).centre(vehicleTypeWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(EquipmentType.class)).description(mkMenuItemDesc(EquipmentType.class)).centre(equipmentTypeWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(Equipment.class)).description(mkMenuItemDesc(Equipment.class)).centre(equipmentWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(Vehicle.class)).description(mkMenuItemDesc(Vehicle.class)).centre(vehicleWebUiConfig.centre).done()
+        .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
+        .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
+        .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
+        .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
+        .done()
+        .done().done()
         .setLayoutFor(Device.DESKTOP, null, "[[[]]]")
         .setLayoutFor(Device.TABLET, null, "[[[]]]")
         .setLayoutFor(Device.MOBILE, null, "[[[]]]")
