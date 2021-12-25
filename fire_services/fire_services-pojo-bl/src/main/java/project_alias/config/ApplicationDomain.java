@@ -17,6 +17,9 @@ import project_alias.equipments.EquipmentType;
 import project_alias.equipments.Equipment;
 import project_alias.vehicles.Vehicle;
 import project_alias.roles.Role;
+import project_alias.equipments.ui_actions.OpenEquipmentClassMasterAction;
+import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenMain_MenuItem;
+import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenEquipmentType_MenuItem;
 
 /**
  * A class to register domain entities.
@@ -28,17 +31,20 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 	private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
 	private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
 
-	static {
-		entityTypes.addAll(PlatformDomainTypes.types);
-		add(Person.class);
-		add(EquipmentClass.class);
-		add(Status.class);
-		add(VehicleType.class);
-		add(EquipmentType.class);
-		add(Equipment.class);
-		add(Vehicle.class);
-		add(Role.class);
-	}
+  static {
+    entityTypes.addAll(PlatformDomainTypes.types);
+    add(Person.class);
+    add(EquipmentClass.class);
+    add(Status.class);
+    add(VehicleType.class);
+    add(EquipmentType.class);
+    add(Equipment.class);
+    add(Vehicle.class);
+    add(Role.class);
+    add(OpenEquipmentClassMasterAction.class);
+    add(EquipmentClassMaster_OpenMain_MenuItem.class);
+    add(EquipmentClassMaster_OpenEquipmentType_MenuItem.class);
+  }
 
 	private static void add(final Class<? extends AbstractEntity<?>> domainType) {
 		entityTypes.add(domainType);
