@@ -11,6 +11,7 @@ import com.google.inject.Injector;
 
 import project_alias.equipments.EquipmentClass;
 import project_alias.equipments.EquipmentType;
+import project_alias.equipments.producers.EquipmentTypeProducer;
 import project_alias.common.LayoutComposer;
 import project_alias.common.StandardActions;
 
@@ -119,6 +120,6 @@ public class EquipmentTypeWebUiConfig {
                 .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 480, Unit.PX))
                 .done();
 
-        return new EntityMaster<>(EquipmentType.class, masterConfig, injector);
+        return new EntityMaster<>(EquipmentType.class, EquipmentTypeProducer.class, masterConfig, injector);
     }
 }
