@@ -1,7 +1,6 @@
-package project_alias.roles;
+package project_alias.form_items;
 
 import ua.com.fielden.platform.entity.DynamicEntityKey;
-
 import project_alias.validators.NoWhiteSpacesValidator;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.annotation.KeyType;
@@ -24,46 +23,46 @@ import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 
 /**
- * Master entity object.
+ * An entity of unique form type item which will be used as a blueprint to create form items.
  *
  * @author Project-alias team
  *
  */
 @KeyType(DynamicEntityKey.class)
-@KeyTitle("Role")
-@CompanionObject(RoleCo.class)
+@KeyTitle("FormTypeItem")
+@CompanionObject(FormTypeItemCo.class)
 @MapEntityTo
 @DescTitle("Description")
 @DisplayDescription
 @DescRequired
-@EntityTitle(value = "Role", desc = "Used to represent role of a person")
-public class Role extends ActivatableAbstractEntity<DynamicEntityKey> {
+@EntityTitle(value = "FormTypeItem", desc = "Used as a blueprint to create new Form items.")
+public class FormTypeItem extends ActivatableAbstractEntity<DynamicEntityKey> {
 
-    private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(Role.class);
+    private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(FormTypeItem.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
     
     @IsProperty
-    @MapTo
-    @Required
-    @Title(value = "Title", desc = "A unique role title.")
-    @CompositeKeyMember(1)
+	@MapTo
+	@Required
+	@Title(value = "Title", desc = "A unique FormTypeItem title")
+	@CompositeKeyMember(1)
     @BeforeChange({@Handler(NoWhiteSpacesValidator.class)})
-    private String title;
-    
-    @Observable
-    public Role setTitle(final String title) {
-        this.title = title;
-        return this;
-    }
+	private String title;
 
-    public String getTitle() {
-        return title;
-    }
-    
-    @Override
+	@Observable
+	public FormTypeItem setTitle(final String title) {
+		this.title = title;
+		return this;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	@Override
     @Observable
-    public Role setDesc(String desc) {
+    public FormTypeItem setDesc(String desc) {
         super.setDesc(desc);
         return this;
     }
