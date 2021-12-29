@@ -16,9 +16,12 @@ import project_alias.vehicles.VehicleType;
 import project_alias.equipments.EquipmentType;
 import project_alias.equipments.Equipment;
 import project_alias.vehicles.Vehicle;
+import project_alias.vehicles.ui_actions.OpenVehicleTypeMasterAction;
 import project_alias.equipments.ui_actions.OpenEquipmentClassMasterAction;
 import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenMain_MenuItem;
 import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenEquipmentType_MenuItem;
+import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenMain_MenuItem;
+import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_MenuItem;
 
 /**
  * A class to register domain entities.
@@ -42,6 +45,9 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(OpenEquipmentClassMasterAction.class);
         add(EquipmentClassMaster_OpenMain_MenuItem.class);
         add(EquipmentClassMaster_OpenEquipmentType_MenuItem.class);
+        add(OpenVehicleTypeMasterAction.class);
+        add(VehicleTypeMaster_OpenMain_MenuItem.class);
+        add(VehicleTypeMaster_OpenVehicle_MenuItem.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {

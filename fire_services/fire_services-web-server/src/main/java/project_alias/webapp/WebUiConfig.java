@@ -16,8 +16,6 @@ import project_alias.vehicles.VehicleType;
 import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentWebUiConfig;
-import project_alias.forms.Status;
-import project_alias.personnel.Person;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
 import project_alias.webapp.config.vehicles.VehicleTypeWebUiConfig;
 import project_alias.webapp.config.vehicles.VehicleWebUiConfig;
