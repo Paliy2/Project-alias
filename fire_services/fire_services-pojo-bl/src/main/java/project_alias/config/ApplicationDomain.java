@@ -16,6 +16,8 @@ import project_alias.vehicles.VehicleType;
 import project_alias.equipments.EquipmentType;
 import project_alias.equipments.Equipment;
 import project_alias.vehicles.Vehicle;
+import project_alias.roles.Role;
+import project_alias.form_items.FormTypeItem;
 import project_alias.vehicles.ui_actions.OpenVehicleTypeMasterAction;
 import project_alias.equipments.ui_actions.OpenEquipmentClassMasterAction;
 import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenMain_MenuItem;
@@ -42,6 +44,8 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(EquipmentType.class);
         add(Equipment.class);
         add(Vehicle.class);
+        add(Role.class);
+        add(FormTypeItem.class);
         add(OpenEquipmentClassMasterAction.class);
         add(EquipmentClassMaster_OpenMain_MenuItem.class);
         add(EquipmentClassMaster_OpenEquipmentType_MenuItem.class);
@@ -51,16 +55,16 @@ public class ApplicationDomain implements IApplicationDomainProvider {
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {
-        entityTypes.add(domainType);
-        domainTypes.add(domainType);
+	entityTypes.add(domainType);
+	domainTypes.add(domainType);
     }
 
     @Override
     public List<Class<? extends AbstractEntity<?>>> entityTypes() {
-        return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
+	return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
     }
 
     public List<Class<? extends AbstractEntity<?>>> domainTypes() {
-        return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
+	return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
     }
 }
