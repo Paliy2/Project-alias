@@ -6,30 +6,30 @@ import static project_alias.common.StandardActionsStyles.MASTER_CANCEL_ACTION_SH
 import static project_alias.common.StandardActionsStyles.MASTER_SAVE_ACTION_LONG_DESC;
 import static project_alias.common.StandardActionsStyles.MASTER_SAVE_ACTION_SHORT_DESC;
 import static project_alias.common.StandardScrollingConfigs.standardStandaloneScrollingConfig;
+import static ua.com.fielden.platform.web.PrefDim.mkDim;
 
 import java.util.Optional;
 
 import com.google.inject.Injector;
 
-import project_alias.vehicles.Vehicle;
-import project_alias.vehicles.VehicleType;
 import project_alias.common.LayoutComposer;
 import project_alias.common.StandardActions;
-
-import ua.com.fielden.platform.web.interfaces.ILayout.Device;
+import project_alias.main.menu.vehicles.MiVehicle;
+import project_alias.vehicles.Vehicle;
+import project_alias.vehicles.VehicleType;
+import project_alias.vehicles.producers.VehicleProducer;
+import ua.com.fielden.platform.web.PrefDim.Unit;
 import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
+import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
+import ua.com.fielden.platform.web.centre.EntityCentre;
 import ua.com.fielden.platform.web.centre.api.EntityCentreConfig;
 import ua.com.fielden.platform.web.centre.api.actions.EntityActionConfig;
 import ua.com.fielden.platform.web.centre.api.impl.EntityCentreBuilder;
+import ua.com.fielden.platform.web.interfaces.ILayout.Device;
+import ua.com.fielden.platform.web.view.master.EntityMaster;
+import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.view.master.api.actions.MasterActions;
 import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
-import ua.com.fielden.platform.web.view.master.api.IMaster;
-import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
-import project_alias.main.menu.vehicles.MiVehicle;
-import ua.com.fielden.platform.web.centre.EntityCentre;
-import ua.com.fielden.platform.web.view.master.EntityMaster;
-import static ua.com.fielden.platform.web.PrefDim.mkDim;
-import ua.com.fielden.platform.web.PrefDim.Unit;
 
 /**
  * {@link Vehicle} Web UI configuration.
@@ -124,6 +124,6 @@ public class VehicleWebUiConfig {
                 .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 440, Unit.PX))
                 .done();
 
-        return new EntityMaster<>(Vehicle.class, masterConfig, injector);
+        return new EntityMaster<>(Vehicle.class, VehicleProducer.class, masterConfig, injector);
     }
 }
