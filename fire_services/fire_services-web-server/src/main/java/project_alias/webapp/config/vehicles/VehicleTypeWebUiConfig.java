@@ -134,7 +134,7 @@ public class VehicleTypeWebUiConfig {
 
     private EntityCentre<Vehicle> createVehicleCentre() {
         final Class<Vehicle> root = Vehicle.class;
-        final String layout = LayoutComposer.mkVarGridForCentre(2, 1);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 2, 1);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_WITH_MASTER_ACTION.mkAction(Vehicle.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Vehicle.class);
