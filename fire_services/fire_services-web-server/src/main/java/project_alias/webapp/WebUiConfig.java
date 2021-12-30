@@ -18,7 +18,6 @@ import project_alias.webapp.config.equipments.EquipmentClassWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentWebUiConfig;
 import project_alias.webapp.config.form_items.FormTypeItemWebUiConfig;
-import project_alias.forms.Status;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
 import project_alias.webapp.config.persons.PersonWebUiConfig;
 import project_alias.webapp.config.roles.RoleWebUiConfig;
