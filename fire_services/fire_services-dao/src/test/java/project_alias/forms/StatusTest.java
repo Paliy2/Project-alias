@@ -18,7 +18,6 @@ import ua.com.fielden.platform.security.user.User;
 import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
 
-import project_alias.personnel.Person;
 import project_alias.test_config.AbstractDaoTestCase;
 
 

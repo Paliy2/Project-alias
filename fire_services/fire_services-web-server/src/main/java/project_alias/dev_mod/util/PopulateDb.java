@@ -14,7 +14,6 @@ import org.hibernate.dialect.H2Dialect;
 
 import project_alias.config.ApplicationDomain;
 import project_alias.forms.Status;
-import project_alias.personnel.Person;
 import project_alias.vehicles.Vehicle;
 import project_alias.vehicles.VehicleType;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
@@ -99,7 +98,6 @@ public class PopulateDb extends DomainDrivenDataPopulation {
 
     private void setupPerson(final User.system_users defaultUser, final String emailDomain) {
         final User su = co(User.class).findByKey(defaultUser.name());
-        save(new_(Person.class).setEmail(defaultUser + "@" + emailDomain).setDesc("Super Person").setUser(su));
     }
 
     @Override
