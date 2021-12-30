@@ -12,7 +12,6 @@ import ua.com.fielden.platform.security.user.User;
 import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 
 import project_alias.config.ApplicationDomain;
-import project_alias.personnel.Person;
 
 /**
  * This calss should be used as the base type for all domain-driven test cases. 
@@ -49,7 +48,6 @@ public abstract class AbstractDaoTestCase extends AbstractDomainDrivenTestCase {
     private void setupPerson(final User.system_users defaultUser, final String emailDomain) {
         if (!useSavedDataPopulationScript()) {
             final User su = co(User.class).findByKey(defaultUser.name());
-            save(new_(Person.class).setEmail(defaultUser + "@" + emailDomain).setDesc("Super Person").setUser(su));
         }
     }
 

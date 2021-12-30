@@ -5,13 +5,11 @@ import static ua.com.fielden.platform.reflection.TitlesDescsGetter.getEntityTitl
 import org.apache.commons.lang3.StringUtils;
 
 import project_alias.config.Modules;
-import project_alias.config.personnel.PersonWebUiConfig;
 import project_alias.equipments.Equipment;
 import project_alias.equipments.EquipmentClass;
 import project_alias.equipments.EquipmentType;
 import project_alias.form_items.FormTypeItem;
 import project_alias.forms.Status;
-import project_alias.personnel.Person;
 import project_alias.roles.Role;
 import project_alias.vehicles.Vehicle;
 import project_alias.vehicles.VehicleType;
@@ -20,7 +18,6 @@ import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentWebUiConfig;
 import project_alias.webapp.config.form_items.FormTypeItemWebUiConfig;
 import project_alias.forms.Status;
-import project_alias.personnel.Person;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
 import project_alias.webapp.config.roles.RoleWebUiConfig;
 import project_alias.webapp.config.vehicles.VehicleTypeWebUiConfig;
@@ -91,8 +88,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         builder.setDateFormat(WEB_DATE_FORMAT_JS).setTimeFormat(WEB_TIME_FORMAT).setTimeWithMillisFormat(WEB_TIME_WITH_MILLIS_FORMAT)
         .setMinTabletWidth(600);
 
-        // Users and Personnel Module
-        final PersonWebUiConfig personWebUiConfig = PersonWebUiConfig.register(injector(), builder);        
+        // Users and Personnel Module    
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
@@ -133,7 +129,6 @@ public class WebUiConfig extends AbstractWebUiConfig {
         .bgColor(Modules.USERS_AND_PERSONNEL.bgColour)
         .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
         .menu()
-        .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(Status.class)).description(mkMenuItemDesc(Status.class)).centre(statusWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(VehicleType.class)).description(mkMenuItemDesc(VehicleType.class)).centre(vehicleTypeWebUiConfig.centre).done()
