@@ -13,5 +13,5 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface PersonCo extends IEntityDao<Person> {
 
     static final IFetchProvider<Person> FETCH_PROVIDER = EntityUtils.fetch(Person.class)
-    		.with("naem", "surname", "phoneNumber", "email");
+    		.with("name", "surname", "phoneNumber", "email");
 }
