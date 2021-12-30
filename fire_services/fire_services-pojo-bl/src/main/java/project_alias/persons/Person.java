@@ -43,58 +43,58 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
     
     @IsProperty(length = 20)
-	@MapTo
-	@Required
-	@Title(value = "Name", desc = "First name of a person")
-	@CompositeKeyMember(1)
+    @MapTo
+    @Required
+    @Title(value = "Name", desc = "First name of a person")
+    @CompositeKeyMember(1)
     @BeforeChange({@Handler(NoWhiteSpacesValidator.class)})
-	private String name;
+    private String name;
 
-	@Observable
-	public Person setName(final String name) {
-		this.name = name;
-		return this;
-	}
+    @Observable
+    public Person setName(final String name) {
+    	this.name = name;
+    	return this;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+    	return name;
+    }
 
-	@IsProperty(length = 40)
-	@MapTo
-	@Required
-	@Title(value = "Surname", desc = "Last name of a person")
-	@CompositeKeyMember(2)
-	@BeforeChange({@Handler(NoWhiteSpacesValidator.class)})
-	private String surname;
+    @IsProperty(length = 40)
+    @MapTo
+    @Required
+    @Title(value = "Surname", desc = "Last name of a person")
+    @CompositeKeyMember(2)
+    @BeforeChange({@Handler(NoWhiteSpacesValidator.class)})
+    private String surname;
 
-	@Observable
-	public Person setSurname(final String surname) {
-		this.surname = surname;
-		return this;
-	}
+    @Observable
+    public Person setSurname(final String surname) {
+    	this.surname = surname;
+    	return this;
+    }
 
-	public String getSurname() {
-		return surname;
-	}
+    public String getSurname() {
+    	return surname;
+    }
 
-	@IsProperty
-	@MapTo
-	@Title(value = "Phone number", desc = "Person's phone number")
-	@BeforeChange(@Handler(PhoneNumberValidator.class))
-	private String phoneNumber;
+    @IsProperty
+    @MapTo
+    @Title(value = "Phone number", desc = "Person's phone number")
+    @BeforeChange(@Handler(PhoneNumberValidator.class))
+    private String phoneNumber;
 
-	@Observable
-	public Person setPhoneNumber(final String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-		return this;
-	}
+    @Observable
+    public Person setPhoneNumber(final String phoneNumber) {
+    	this.phoneNumber = phoneNumber;
+    	return this;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public String getPhoneNumber() {
+    	return phoneNumber;
+    }
 
-	@IsProperty
+    @IsProperty
     @CompositeKeyMember(3)
     @MapTo
     @Required
@@ -102,7 +102,7 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
     @BeforeChange(@Handler(EmailValidator.class))
     private String email;
 	
-	@Observable
+    @Observable
     public Person setEmail(final String email) {
         this.email = email;
         return this;
