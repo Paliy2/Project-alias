@@ -1,6 +1,7 @@
 package project_alias.persons;
 
 import ua.com.fielden.platform.entity.DynamicEntityKey;
+import project_alias.equipments.Equipment;
 import project_alias.validators.NoWhiteSpacesValidator;
 import project_alias.validators.PhoneNumberValidator;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
@@ -110,5 +111,12 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     public String getEmail() {
         return email;
+    }
+    
+    @Override
+    @Observable
+    protected Person setActive(boolean active) {
+        super.setActive(active);
+        return this;
     }
 }

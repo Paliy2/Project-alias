@@ -59,7 +59,7 @@ public class PersonWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<Person> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkVarGridForCentre(1, 2, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 2, 2);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Person.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Person.class);
@@ -76,6 +76,7 @@ public class PersonWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(Person.class).also()
+                .addCrit("active").asMulti().bool().also()
                 .addCrit("name").asMulti().text().also()
                 .addCrit("surname").asMulti().text().also()
                 .addCrit("phoneNumber").asMulti().text().also()
@@ -103,11 +104,12 @@ public class PersonWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Person> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(4, 1);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(5, 1);
 
         final IMaster<Person> masterConfig = new SimpleMasterBuilder<Person>().forEntity(Person.class)
         		.addProp("name").asMultilineText().also()
                 .addProp("surname").asMultilineText().also()
+                .addProp("active").asCheckbox().also()
                 .addProp("phoneNumber").asSinglelineText().also()
                 .addProp("email").asSinglelineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc(MASTER_CANCEL_ACTION_SHORT_DESC).longDesc(MASTER_CANCEL_ACTION_LONG_DESC)
