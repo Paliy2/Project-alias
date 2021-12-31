@@ -24,6 +24,8 @@ import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenMai
 import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenEquipmentType_MenuItem;
 import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenMain_MenuItem;
 import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_MenuItem;
+import project_alias.form_items.FormItem;
+import project_alias.form_items.FormItemLocator;
 
 /**
  * A class to register domain entities.
@@ -32,39 +34,41 @@ import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_
  * 
  */
 public class ApplicationDomain implements IApplicationDomainProvider {
-	private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
-	private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
+    private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
+    private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
 
-  static {
-    entityTypes.addAll(PlatformDomainTypes.types);
-    add(EquipmentClass.class);
-    add(Status.class);
-    add(VehicleType.class);
-    add(EquipmentType.class);
-    add(Equipment.class);
-    add(Vehicle.class);
-    add(Role.class);
-    add(FormTypeItem.class);
-    add(Person.class);
-    add(OpenEquipmentClassMasterAction.class);
-    add(EquipmentClassMaster_OpenMain_MenuItem.class);
-    add(EquipmentClassMaster_OpenEquipmentType_MenuItem.class);
-    add(OpenVehicleTypeMasterAction.class);
-    add(VehicleTypeMaster_OpenMain_MenuItem.class);
-    add(VehicleTypeMaster_OpenVehicle_MenuItem.class);
-  }
+    static {
+        entityTypes.addAll(PlatformDomainTypes.types);
+        add(EquipmentClass.class);
+        add(Status.class);
+        add(VehicleType.class);
+        add(EquipmentType.class);
+        add(Equipment.class);
+        add(Vehicle.class);
+        add(Role.class);
+        add(FormTypeItem.class);
+        add(Person.class);
+        add(OpenEquipmentClassMasterAction.class);
+        add(EquipmentClassMaster_OpenMain_MenuItem.class);
+        add(EquipmentClassMaster_OpenEquipmentType_MenuItem.class);
+        add(OpenVehicleTypeMasterAction.class);
+        add(VehicleTypeMaster_OpenMain_MenuItem.class);
+        add(VehicleTypeMaster_OpenVehicle_MenuItem.class);
+        add(FormItem.class);
+        add(FormItemLocator.class);
+    }
 
-	private static void add(final Class<? extends AbstractEntity<?>> domainType) {
-		entityTypes.add(domainType);
-		domainTypes.add(domainType);
-	}
+    private static void add(final Class<? extends AbstractEntity<?>> domainType) {
+        entityTypes.add(domainType);
+        domainTypes.add(domainType);
+    }
 
-	@Override
-	public List<Class<? extends AbstractEntity<?>>> entityTypes() {
-		return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
-	}
+    @Override
+    public List<Class<? extends AbstractEntity<?>>> entityTypes() {
+        return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
+    }
 
-	public List<Class<? extends AbstractEntity<?>>> domainTypes() {
-		return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
-	}
+    public List<Class<? extends AbstractEntity<?>>> domainTypes() {
+        return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
+    }
 }
