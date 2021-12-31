@@ -10,7 +10,7 @@ import com.google.inject.Injector;
 import project_alias.forms.FormType;
 import project_alias.common.LayoutComposer;
 import project_alias.common.StandardActions;
-
+import project_alias.form_items.FormTypeItem;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
 import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
 import ua.com.fielden.platform.web.centre.api.EntityCentreConfig;
@@ -21,6 +21,7 @@ import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
 import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
 import project_alias.main.menu.forms.MiFormType;
+import project_alias.roles.Role;
 import ua.com.fielden.platform.web.centre.EntityCentre;
 import ua.com.fielden.platform.web.view.master.EntityMaster;
 import static ua.com.fielden.platform.web.PrefDim.mkDim;
@@ -72,7 +73,11 @@ public class FormTypeWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(FormType.class).also()
-                .addCrit("desc").asMulti().text()
+                .addCrit("title").asMulti().text().also()
+                .addCrit("desc").asMulti().text().also()
+                .addCrit("assignedRole").asMulti().autocompleter(Role.class).also()
+                .addCrit("formTypeItems").asMulti().autocompleter(FormTypeItem.class)
+
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -80,7 +85,11 @@ public class FormTypeWebUiConfig {
                 .addProp("this").order(1).asc().minWidth(100)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", FormType.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
-                .addProp("desc").minWidth(100)
+                .addProp("title").minWidth(50).also()
+                .addProp("desc").minWidth(150).also()
+                .addProp("assignedRole").minWidth(100).also()
+                .addProp("formTypeItems").minWidth(100)
+
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
                 .build();
@@ -98,8 +107,11 @@ public class FormTypeWebUiConfig {
         final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
 
         final IMaster<FormType> masterConfig = new SimpleMasterBuilder<FormType>().forEntity(FormType.class)
-                .addProp("key").asSinglelineText().also()
+                .addProp("title").asSinglelineText().also()
                 .addProp("desc").asMultilineText().also()
+                .addProp("assignedRole").asAutocompleter().also()
+                .addProp("formTypeItems").asAutocompleter().also()
+
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())

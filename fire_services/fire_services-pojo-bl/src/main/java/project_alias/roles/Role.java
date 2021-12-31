@@ -1,4 +1,4 @@
-package project_alias.roles;
+    package project_alias.roles;
 
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 
