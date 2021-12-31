@@ -11,6 +11,7 @@ import project_alias.equipments.EquipmentType;
 import project_alias.form_items.FormItem;
 import project_alias.form_items.FormTypeItem;
 import project_alias.forms.Status;
+import project_alias.forms.FormType;
 import project_alias.persons.Person;
 import project_alias.roles.Role;
 import project_alias.vehicles.Vehicle;
@@ -20,6 +21,7 @@ import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentWebUiConfig;
 import project_alias.webapp.config.form_items.FormItemWebUiConfig;
 import project_alias.webapp.config.form_items.FormTypeItemWebUiConfig;
+import project_alias.webapp.config.forms.FormTypeWebUiConfig;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
 import project_alias.webapp.config.persons.PersonWebUiConfig;
 import project_alias.webapp.config.roles.RoleWebUiConfig;
@@ -98,7 +100,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
 
         // Forms Module
         final StatusWebUiConfig statusWebUiConfig = StatusWebUiConfig.register(injector(), builder);
-
+        final FormTypeWebUiConfig formTypeWebUiConfig = FormTypeWebUiConfig.register(injector(), builder);
+        
         // Equipments Module
         final EquipmentClassWebUiConfig equipmentClassWebUiConfig = EquipmentClassWebUiConfig.register(injector(), builder);
         final EquipmentTypeWebUiConfig equipmentTypeWebUiConfig = EquipmentTypeWebUiConfig.register(injector(), builder);
@@ -137,6 +140,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
         .menu()
         .addMenuItem(mkMenuItemTitle(Status.class)).description(mkMenuItemDesc(Status.class)).centre(statusWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(FormType.class)).description(mkMenuItemDesc(FormType.class)).centre(formTypeWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(EquipmentClass.class)).description(mkMenuItemDesc(EquipmentClass.class)).centre(equipmentClassWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(VehicleType.class)).description(mkMenuItemDesc(VehicleType.class)).centre(vehicleTypeWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(EquipmentType.class)).description(mkMenuItemDesc(EquipmentType.class)).centre(equipmentTypeWebUiConfig.centre).done()

@@ -26,6 +26,7 @@ import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenMain_Men
 import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_MenuItem;
 import project_alias.form_items.FormItem;
 import project_alias.form_items.FormItemLocator;
+import project_alias.forms.FormType;
 
 /**
  * A class to register domain entities.
@@ -56,6 +57,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(VehicleTypeMaster_OpenVehicle_MenuItem.class);
         add(FormItem.class);
         add(FormItemLocator.class);
+        add(FormType.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {

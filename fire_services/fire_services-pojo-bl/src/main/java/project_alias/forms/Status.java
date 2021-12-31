@@ -58,6 +58,4 @@ public class Status extends AbstractPersistentEntity<DynamicEntityKey> {
         return title;
     }
 
-
-
 }
