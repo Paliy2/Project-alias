@@ -1,5 +1,8 @@
 package project_alias.webapp.config.forms;
 
+import ua.com.fielden.platform.web.minijs.JsCode;
+import static ua.com.fielden.platform.web.centre.api.context.impl.EntityCentreContextSelector.context;
+import static ua.com.fielden.platform.web.centre.api.actions.impl.EntityActionBuilder.action;
 import static java.lang.String.format;
 import static project_alias.common.StandardScrollingConfigs.standardStandaloneScrollingConfig;
 
@@ -8,8 +11,16 @@ import java.util.Optional;
 import com.google.inject.Injector;
 
 import project_alias.forms.FormType;
+import project_alias.forms.actions.FormTypeBatchUpdateForAssetClassAction;
+import project_alias.forms.actions.producers.FormTypeBatchUpdateForAssetClassActionProducer;
+import project_alias.forms.producers.FormTypeProducer;
 import project_alias.common.LayoutComposer;
 import project_alias.common.StandardActions;
+import project_alias.common.StandardActionsStyles;
+import static project_alias.common.StandardActionsStyles.MASTER_CANCEL_ACTION_LONG_DESC;
+import static project_alias.common.StandardActionsStyles.MASTER_CANCEL_ACTION_SHORT_DESC;
+import static project_alias.common.StandardActionsStyles.MASTER_SAVE_ACTION_LONG_DESC;
+import static project_alias.common.StandardActionsStyles.MASTER_SAVE_ACTION_SHORT_DESC;
 import project_alias.form_items.FormTypeItem;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
 import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
@@ -47,6 +58,8 @@ public class FormTypeWebUiConfig {
         builder.register(centre);
         master = createMaster(injector);
         builder.register(master);
+        
+        builder.register(createAssetTypeBatchUpdateForAssetClassActionMaster(injector));
     }
 
     /**
@@ -64,19 +77,29 @@ public class FormTypeWebUiConfig {
         final EntityActionConfig standardEditAction = StandardActions.EDIT_ACTION.mkAction(FormType.class);
         final EntityActionConfig standardSortAction = CentreConfigActions.CUSTOMISE_COLUMNS_ACTION.mkAction();
         builder.registerOpenMasterAction(FormType.class, standardEditAction);
-
+        
+        final EntityActionConfig topActionToBatchUpdateFormClasses = action(FormTypeBatchUpdateForAssetClassAction.class)
+                .withContext(context().withSelectedEntities().build())
+                .postActionSuccess(() -> new JsCode("self.$.egi.clearPageSelection()"))
+                .icon("icons:check-circle")
+                .withStyle(StandardActionsStyles.CUSTOM_ACTION_COLOUR)
+                .shortDesc("Batch update for From Types")
+                .longDesc("Batch update property from class for selected types")
+                .build();
+        
         final EntityCentreConfig<FormType> ecc = EntityCentreBuilder.centreFor(FormType.class)
                 //.runAutomatically()
                 .addFrontAction(standardNewAction)
                 .addTopAction(standardNewAction).also()
                 .addTopAction(standardDeleteAction).also()
                 .addTopAction(standardSortAction).also()
-                .addTopAction(standardExportAction)
+                .addTopAction(standardExportAction).also()
+                .addTopAction(topActionToBatchUpdateFormClasses)
                 .addCrit("this").asMulti().autocompleter(FormType.class).also()
                 .addCrit("title").asMulti().text().also()
                 .addCrit("desc").asMulti().text().also()
-                .addCrit("assignedRole").asMulti().autocompleter(Role.class).also()
-                .addCrit("formTypeItems").asMulti().autocompleter(FormTypeItem.class)
+//                .addCrit("formTypeItems").asMulti().autocompleter(FormTypeItem.class).also()
+                .addCrit("assignedRole").asMulti().autocompleter(Role.class)
 
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
@@ -87,8 +110,8 @@ public class FormTypeWebUiConfig {
                     .withAction(standardEditAction).also()
                 .addProp("title").minWidth(50).also()
                 .addProp("desc").minWidth(150).also()
-                .addProp("assignedRole").minWidth(100).also()
-                .addProp("formTypeItems").minWidth(100)
+//                .addProp("formTypeItems").minWidth(100).also()
+                .addProp("assignedRole").minWidth(100)
 
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
@@ -110,7 +133,7 @@ public class FormTypeWebUiConfig {
                 .addProp("title").asSinglelineText().also()
                 .addProp("desc").asMultilineText().also()
                 .addProp("assignedRole").asAutocompleter().also()
-                .addProp("formTypeItems").asAutocompleter().also()
+//                .addProp("formTypeItems").asAutocompleter().also()
 
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
@@ -121,6 +144,23 @@ public class FormTypeWebUiConfig {
                 .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 480, Unit.PX))
                 .done();
 
-        return new EntityMaster<>(FormType.class, masterConfig, injector);
+        return new EntityMaster<>(FormType.class, FormTypeProducer.class, masterConfig, injector);
+    }
+    
+    private EntityMaster<FormTypeBatchUpdateForAssetClassAction> createAssetTypeBatchUpdateForAssetClassActionMaster(final Injector injector) {
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 1);
+
+        final var masterConfig = new SimpleMasterBuilder<FormTypeBatchUpdateForAssetClassAction>().forEntity(FormTypeBatchUpdateForAssetClassAction.class)
+                .addProp("formClass").asAutocompleter().also()
+                .addAction(MasterActions.REFRESH).shortDesc(MASTER_CANCEL_ACTION_SHORT_DESC).longDesc(MASTER_CANCEL_ACTION_LONG_DESC)
+                .addAction(MasterActions.SAVE).shortDesc(MASTER_SAVE_ACTION_SHORT_DESC).longDesc(MASTER_SAVE_ACTION_LONG_DESC)
+                .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())
+                .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
+                .setLayoutFor(Device.TABLET, Optional.empty(), layout)
+                .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
+                .withDimensions(mkDim(300, 200, Unit.PX))
+                .done();
+
+        return new EntityMaster<>(FormTypeBatchUpdateForAssetClassAction.class, FormTypeBatchUpdateForAssetClassActionProducer.class, masterConfig, injector);
     }
 }

@@ -27,6 +27,10 @@ import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_
 import project_alias.form_items.FormItem;
 import project_alias.form_items.FormItemLocator;
 import project_alias.forms.FormType;
+import project_alias.forms.actions.FormTypeBatchUpdateForAssetClassAction;
+import project_alias.forms.FormClass;
+import project_alias.forms.FormClassLocator;
+import project_alias.forms.actions.FormTypeBatchUpdateForFormClassAction;
 
 /**
  * A class to register domain entities.
@@ -58,6 +62,10 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(FormItem.class);
         add(FormItemLocator.class);
         add(FormType.class);
+        add(FormTypeBatchUpdateForAssetClassAction.class);
+        add(FormClass.class);
+        add(FormClassLocator.class);
+        add(FormTypeBatchUpdateForFormClassAction.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {
