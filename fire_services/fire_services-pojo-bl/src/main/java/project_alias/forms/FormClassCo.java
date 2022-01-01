@@ -13,6 +13,6 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface FormClassCo extends IEntityDao<FormClass> {
 
     static final IFetchProvider<FormClass> FETCH_PROVIDER = EntityUtils.fetch(FormClass.class)
-            .with("formType", "person", "status");
+            .with("person", "status", "date"); //formType
 
 }

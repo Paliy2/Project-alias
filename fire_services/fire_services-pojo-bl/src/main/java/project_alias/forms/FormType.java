@@ -116,7 +116,6 @@ public class FormType extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     @IsProperty
     @MapTo
-    @Required
     @Title(value = "Form Class", desc = "Associated Form Class")
     private FormClass formClass;
 

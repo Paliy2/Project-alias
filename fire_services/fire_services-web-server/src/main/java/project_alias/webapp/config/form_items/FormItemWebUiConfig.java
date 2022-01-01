@@ -59,7 +59,7 @@ public class FormItemWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<FormItem> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkGridForCentre(2, 2);
 
         final EntityActionConfig locator = mkLocator(builder, injector, FormItemLocator.class, "formItem");
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(FormItem.class);
@@ -88,7 +88,9 @@ public class FormItemWebUiConfig {
                 .addProp("this").order(1).asc().minWidth(100)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", FormItem.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
+                .addProp("accepted").minWidth(100).also()
                 .addProp("formTypeItem").minWidth(100)
+
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
                 .build();
@@ -103,9 +105,10 @@ public class FormItemWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<FormItem> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 2);
 
         final IMaster<FormItem> masterConfig = new SimpleMasterBuilder<FormItem>().forEntity(FormItem.class)
+                .addProp("this").asAutocompleter().also()
                 .addProp("formTypeItem").asAutocompleter().also()
                 .addProp("accepted").asCheckbox().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")

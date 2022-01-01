@@ -11,6 +11,7 @@ import project_alias.equipments.EquipmentType;
 import project_alias.form_items.FormItem;
 import project_alias.form_items.FormTypeItem;
 import project_alias.forms.Status;
+import project_alias.forms.FormClass;
 import project_alias.forms.FormType;
 import project_alias.persons.Person;
 import project_alias.roles.Role;
@@ -21,6 +22,7 @@ import project_alias.webapp.config.equipments.EquipmentTypeWebUiConfig;
 import project_alias.webapp.config.equipments.EquipmentWebUiConfig;
 import project_alias.webapp.config.form_items.FormItemWebUiConfig;
 import project_alias.webapp.config.form_items.FormTypeItemWebUiConfig;
+import project_alias.webapp.config.forms.FormClassWebUiConfig;
 import project_alias.webapp.config.forms.FormTypeWebUiConfig;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
 import project_alias.webapp.config.persons.PersonWebUiConfig;
@@ -101,7 +103,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
         // Forms Module
         final StatusWebUiConfig statusWebUiConfig = StatusWebUiConfig.register(injector(), builder);
         final FormTypeWebUiConfig formTypeWebUiConfig = FormTypeWebUiConfig.register(injector(), builder);
-        
+        final FormClassWebUiConfig formClassWebUiConfig = FormClassWebUiConfig.register(injector(), builder);
+
         // Equipments Module
         final EquipmentClassWebUiConfig equipmentClassWebUiConfig = EquipmentClassWebUiConfig.register(injector(), builder);
         final EquipmentTypeWebUiConfig equipmentTypeWebUiConfig = EquipmentTypeWebUiConfig.register(injector(), builder);
@@ -149,6 +152,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         .addMenuItem(mkMenuItemTitle(Role.class)).description(mkMenuItemDesc(Role.class)).centre(roleWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(FormTypeItem.class)).description(mkMenuItemDesc(FormTypeItem.class)).centre(formTypeItemWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(FormItem.class)).description(mkMenuItemDesc(FormItem.class)).centre(formItemWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(FormClass.class)).description(mkMenuItemDesc(FormClass.class)).centre(formClassWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
         .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
         .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()

@@ -11,6 +11,7 @@ import java.util.Optional;
 import com.google.inject.Injector;
 
 import project_alias.forms.FormType;
+import project_alias.forms.FormClass;
 import project_alias.forms.actions.FormTypeBatchUpdateForAssetClassAction;
 import project_alias.forms.actions.producers.FormTypeBatchUpdateForAssetClassActionProducer;
 import project_alias.forms.producers.FormTypeProducer;
@@ -69,7 +70,7 @@ public class FormTypeWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<FormType> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkGridForCentre(2, 2);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(FormType.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(FormType.class);
@@ -98,6 +99,8 @@ public class FormTypeWebUiConfig {
                 .addCrit("this").asMulti().autocompleter(FormType.class).also()
                 .addCrit("title").asMulti().text().also()
                 .addCrit("desc").asMulti().text().also()
+                .addCrit("formClass").asMulti().autocompleter(FormClass.class).also()
+
 //                .addCrit("formTypeItems").asMulti().autocompleter(FormTypeItem.class).also()
                 .addCrit("assignedRole").asMulti().autocompleter(Role.class)
 
@@ -108,10 +111,11 @@ public class FormTypeWebUiConfig {
                 .addProp("this").order(1).asc().minWidth(100)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", FormType.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
+                .addProp("formClass").minWidth(100).also()
                 .addProp("title").minWidth(50).also()
-                .addProp("desc").minWidth(150).also()
 //                .addProp("formTypeItems").minWidth(100).also()
-                .addProp("assignedRole").minWidth(100)
+                .addProp("assignedRole").minWidth(100).also()
+                .addProp("desc").minWidth(150)
 
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
@@ -127,9 +131,10 @@ public class FormTypeWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<FormType> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 2);
 
         final IMaster<FormType> masterConfig = new SimpleMasterBuilder<FormType>().forEntity(FormType.class)
+                .addProp("formClass").asAutocompleter().also()
                 .addProp("title").asSinglelineText().also()
                 .addProp("desc").asMultilineText().also()
                 .addProp("assignedRole").asAutocompleter().also()

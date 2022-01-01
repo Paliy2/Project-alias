@@ -1,13 +1,18 @@
 package project_alias.forms;
 
-import org.joda.time.DateTime;
+import java.util.Date;
 
 import project_alias.persons.Person;
 import project_alias.roles.Role;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
+import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
+import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
+import ua.com.fielden.platform.entity.annotation.DescTitle;
+import ua.com.fielden.platform.entity.annotation.DisplayDescription;
+import ua.com.fielden.platform.entity.annotation.EntityTitle;
 import ua.com.fielden.platform.entity.annotation.IsProperty;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
@@ -20,14 +25,17 @@ import ua.com.fielden.platform.utils.Pair;
 /**
  * Master entity object.
  *
- * @author Developers
+ * @author Projet-alias team
  *
  */
-@KeyType(String.class)
-@KeyTitle("Form")
+@KeyType(DynamicEntityKey.class)
+@KeyTitle("Form Class")
 @CompanionObject(FormClassCo.class)
 @MapEntityTo
-public class FormClass extends ActivatableAbstractEntity<String> {
+@DescTitle("Description")
+@DisplayDescription
+@EntityTitle(value = "Form Class", desc = "Used to make different templates for forms.")
+public class FormClass extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(FormClass.class);
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
@@ -36,6 +44,7 @@ public class FormClass extends ActivatableAbstractEntity<String> {
     @IsProperty
     @MapTo
     @Required
+    @CompositeKeyMember(1)
     @Title(value = "Person", desc = "Form owner.")
     private Person person;
 
@@ -49,20 +58,21 @@ public class FormClass extends ActivatableAbstractEntity<String> {
         return person;
     }    
     
-//    @IsProperty
-//    @MapTo
-//    @Title(value = "Date", desc = "Datetime the form was created.")
-//    private DateTime date;
-//
-//    @Observable
-//    public FormClass setDate(final DateTime date) {
-//        this.date = date;
-//        return this;
-//    }
-//
-//    public DateTime getDate() {
-//        return date;
-//    }    
+    @IsProperty
+    @MapTo
+    @CompositeKeyMember(2)
+    @Title(value = "Date", desc = "Datetime the form was created.")
+    private Date date;
+
+    @Observable
+    public FormClass setDate(final Date date) {
+        this.date = date;
+        return this;
+    }
+
+    public Date getDate() {
+        return date;
+    }    
 
     @IsProperty
     @MapTo
@@ -80,21 +90,21 @@ public class FormClass extends ActivatableAbstractEntity<String> {
         return status;
     }    
     
-    @IsProperty
-    @MapTo
-    @Required
-    @Title(value = "Form Type", desc = "Record the form type.")
-    private FormType formType;
-
-    @Observable
-    public FormClass setFormType(final FormType formType) {
-        this.formType = formType;
-        return this;
-    }
-
-    public FormType getFormType() {
-        return formType;
-    }   
-    
+//    @IsProperty
+//    @MapTo
+//    @Required
+//    @Title(value = "Form Type", desc = "Record the form type.")
+//    private FormType formType;
+//
+//    @Observable
+//    public FormClass setFormType(final FormType formType) {
+//        this.formType = formType;
+//        return this;
+//    }
+//
+//    public FormType getFormType() {
+//        return formType;
+//    }   
+//    
     
 }

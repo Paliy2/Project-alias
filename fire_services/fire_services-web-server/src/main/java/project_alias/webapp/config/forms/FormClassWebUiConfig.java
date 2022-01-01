@@ -61,7 +61,7 @@ public class FormClassWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<FormClass> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkGridForCentre(2, 2);
 
         final EntityActionConfig locator = mkLocator(builder, injector, FormClassLocator.class, "formClass");
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(FormClass.class);
@@ -82,8 +82,9 @@ public class FormClassWebUiConfig {
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(FormClass.class).also()
                 .addCrit("status").asMulti().autocompleter(Status.class).also()
-                .addCrit("formType").asMulti().autocompleter(FormType.class).also()
-                .addCrit("person").asMulti().autocompleter(Person.class)
+//                .addCrit("formType").asMulti().autocompleter(FormType.class).also()
+                .addCrit("person").asMulti().autocompleter(Person.class).also()
+                .addCrit("date").asRange().dateTime()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -92,7 +93,8 @@ public class FormClassWebUiConfig {
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", FormClass.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
                 .addProp("status").minWidth(100).also()
-                .addProp("formType").minWidth(150).also()
+                .addProp("date").width(150).also()
+//                .addProp("formType").minWidth(150).also()
                 .addProp("person").minWidth(150)
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
@@ -108,12 +110,13 @@ public class FormClassWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<FormClass> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 2);
 
         final IMaster<FormClass> masterConfig = new SimpleMasterBuilder<FormClass>().forEntity(FormClass.class)
-                .addProp("status").asSinglelineText().also()
-                .addProp("person").asMultilineText().also()
-                .addProp("formType").asMultilineText().also()
+                .addProp("status").asAutocompleter().also()
+                .addProp("person").asAutocompleter().also()
+                .addProp("date").asDateTimePicker().also()
+//                .addProp("formType").asAutocompleter().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())

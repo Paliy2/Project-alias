@@ -59,7 +59,7 @@ public class FormTypeItemWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<FormTypeItem> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkGridForCentre(2, 2);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(FormTypeItem.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(FormTypeItem.class);
@@ -76,14 +76,17 @@ public class FormTypeItemWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(FormTypeItem.class).also()
+                .addCrit("title").asMulti().text().also()
                 .addCrit("desc").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
-                .addProp("this").order(1).asc().width(100)
+                .addProp("this").order(1).asc().minWidth(150)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", FormTypeItem.ENTITY_TITLE)).also()
+                .addProp("title").minWidth(150).also()
                 .addProp("desc").minWidth(300)
+
                 .addPrimaryAction(standardEditAction)
                 .build();
 
@@ -97,9 +100,10 @@ public class FormTypeItemWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<FormTypeItem> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 1);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 2);
 
         final IMaster<FormTypeItem> masterConfig = new SimpleMasterBuilder<FormTypeItem>().forEntity(FormTypeItem.class)
+                .addProp("this").asAutocompleter().also()
                 .addProp("title").asSinglelineText().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc(MASTER_CANCEL_ACTION_SHORT_DESC).longDesc(MASTER_CANCEL_ACTION_LONG_DESC)
