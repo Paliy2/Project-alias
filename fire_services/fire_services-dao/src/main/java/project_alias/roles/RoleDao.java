@@ -9,6 +9,7 @@ import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.security.Authorise;
 import ua.com.fielden.platform.dao.annotations.SessionRequired;
 import project_alias.security.tokens.persistent.Role_CanSave_Token;
+import project_alias.equipments.Equipment;
 import project_alias.security.tokens.persistent.Role_CanDelete_Token;
 import ua.com.fielden.platform.dao.CommonEntityDao;
 import ua.com.fielden.platform.entity.query.IFilter;
@@ -26,6 +27,11 @@ public class RoleDao extends CommonEntityDao<Role> implements RoleCo {
     @Inject
     public RoleDao(final IFilter filter) {
         super(filter);
+    }
+    
+    @Override
+    public Role new_() {
+        return super.new_().setActive(true);
     }
 
     @Override

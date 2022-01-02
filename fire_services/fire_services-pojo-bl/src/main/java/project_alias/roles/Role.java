@@ -1,7 +1,7 @@
 package project_alias.roles;
 
 import ua.com.fielden.platform.entity.DynamicEntityKey;
-
+import project_alias.equipments.Equipment;
 import project_alias.validators.NoWhiteSpacesValidator;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.annotation.KeyType;
@@ -65,6 +65,13 @@ public class Role extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Observable
     public Role setDesc(String desc) {
         super.setDesc(desc);
+        return this;
+    }
+    
+    @Override
+    @Observable
+    protected Role setActive(boolean active) {
+        super.setActive(active);
         return this;
     }
 }
