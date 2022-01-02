@@ -42,50 +42,50 @@ public class PersonRole extends ActivatableAbstractEntity<DynamicEntityKey> {
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
 
     @IsProperty
-	@MapTo
-	@Title(value = "Person", desc = "Person which the assignedRole was assigned to at assignedDate")
-	@CompositeKeyMember(1)
-	private Person person;
+    @MapTo
+    @Title(value = "Person", desc = "Person which the assignedRole was assigned to at assignedDate")
+    @CompositeKeyMember(1)
+    private Person person;
 
-	@Observable
-	public PersonRole setPerson(final Person person) {
-		this.person = person;
-		return this;
-	}
+    @Observable
+    public PersonRole setPerson(final Person person) {
+    	this.person = person;
+    	return this;
+    }
 
-	public Person getPerson() {
-		return person;
-	}
+    public Person getPerson() {
+    	return person;
+    }
 
-	@IsProperty
-	@MapTo
-	@Title(value = "Assigned role", desc = "Role the person was assigned at specific date")
-	@Required
-	private Role assignedRole;
+    @IsProperty
+    @MapTo
+    @Title(value = "Assigned role", desc = "Role the person was assigned at specific date")
+    @Required
+    private Role assignedRole;
 
-	@Observable
-	public PersonRole setAssignedRole(final Role assignedRole) {
-		this.assignedRole = assignedRole;
-		return this;
-	}
+    @Observable
+    public PersonRole setAssignedRole(final Role assignedRole) {
+    	this.assignedRole = assignedRole;
+    	return this;
+    }
 
-	public Role getAssignedRole() {
-		return assignedRole;
-	}
+    public Role getAssignedRole() {
+    	return assignedRole;
+    }
 
-	@IsProperty
-	@MapTo
-	@Title(value = "Assigned date", desc = "Date when the role was assigned to a person")
-	@CompositeKeyMember(2)
-	private Date assignedDate;
+    @IsProperty
+    @MapTo
+    @Title(value = "Assigned date", desc = "Date when the role was assigned to a person")
+    @CompositeKeyMember(2)
+    private Date assignedDate;
 
-	@Observable
-	public PersonRole setAssignedDate(final Date assignedDate) {
-		this.assignedDate = assignedDate;
-		return this;
-	}
+    @Observable
+    public PersonRole setAssignedDate(final Date assignedDate) {
+    	this.assignedDate = assignedDate;
+    	return this;
+    }
 
-	public Date getAssignedDate() {
-		return assignedDate;
-	}
+    public Date getAssignedDate() {
+    	return assignedDate;
+    }
 }
