@@ -26,11 +26,15 @@ import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenMain_Men
 import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_MenuItem;
 import project_alias.form_items.FormItem;
 import project_alias.form_items.FormItemLocator;
+<<<<<<< HEAD
 import project_alias.forms.FormType;
 import project_alias.forms.actions.FormTypeBatchUpdateForAssetClassAction;
 import project_alias.forms.FormClass;
 import project_alias.forms.FormClassLocator;
 import project_alias.forms.actions.FormTypeBatchUpdateForFormClassAction;
+=======
+import project_alias.persons.PersonRole;
+>>>>>>> 10e2d0470f8f607142f493230738f2a2024cdd6b
 
 /**
  * A class to register domain entities.
@@ -66,19 +70,20 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(FormClass.class);
         add(FormClassLocator.class);
         add(FormTypeBatchUpdateForFormClassAction.class);
+    	add(PersonRole.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {
-        entityTypes.add(domainType);
-        domainTypes.add(domainType);
+    	entityTypes.add(domainType);
+    	domainTypes.add(domainType);
     }
 
     @Override
     public List<Class<? extends AbstractEntity<?>>> entityTypes() {
-        return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
+    	return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
     }
 
     public List<Class<? extends AbstractEntity<?>>> domainTypes() {
-        return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
+    	return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
     }
 }

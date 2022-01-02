@@ -14,6 +14,7 @@ import org.hibernate.dialect.H2Dialect;
 
 import project_alias.config.ApplicationDomain;
 import project_alias.forms.Status;
+import project_alias.persons.Person;
 import project_alias.vehicles.Vehicle;
 import project_alias.vehicles.VehicleType;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
@@ -92,7 +93,9 @@ public class PopulateDb extends DomainDrivenDataPopulation {
                 + "the iconic ladder extending from the top rear of the machine. The ladder extends telescopically to reach upper stories of buildings."));
         co(Vehicle.class).save(co(Vehicle.class).new_().
                 setNumber("AA8888AA").setModel("MAN (TGM12.240)").setVehicleType(vehicleType));
-        
+
+        co(Person.class).save(co(Person.class).new_().setName("Misha").setSurname("Toptikhin").setEmail("mishatop@gmail.com"));
+
         LOGGER.info("Completed database creation and population.");
     }
 

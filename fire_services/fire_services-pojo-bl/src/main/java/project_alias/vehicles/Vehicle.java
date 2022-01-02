@@ -1,11 +1,11 @@
 package project_alias.vehicles;
 
+import project_alias.persons.Person;
 import project_alias.validators.VehicleNumberValidator;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
-import ua.com.fielden.platform.entity.annotation.DescRequired;
 import ua.com.fielden.platform.entity.annotation.DescTitle;
 import ua.com.fielden.platform.entity.annotation.DisplayDescription;
 import ua.com.fielden.platform.entity.annotation.EntityTitle;
@@ -19,7 +19,6 @@ import ua.com.fielden.platform.entity.annotation.Required;
 import ua.com.fielden.platform.entity.annotation.Title;
 import ua.com.fielden.platform.entity.annotation.mutator.BeforeChange;
 import ua.com.fielden.platform.entity.annotation.mutator.Handler;
-import ua.com.fielden.platform.entity.validation.MaxLengthValidator;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 
@@ -64,7 +63,7 @@ public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
     @IsProperty
     @MapTo
     @Title(value = "Assigned Driver", desc = "The driver who is assigned to this vehicle currently")
-    private String assignedDriver;
+    private Person assignedDriver;
 
     @Observable
     public Vehicle setNumber(final String number) {
@@ -97,12 +96,12 @@ public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
     }
 
     @Observable
-    public Vehicle setAssignedDriver(final String assignedDriver) {
+    public Vehicle setAssignedDriver(final Person assignedDriver) {
         this.assignedDriver = assignedDriver;
         return this;
     }
 
-    public String getAssignedDriver() {
+    public Person getAssignedDriver() {
         return assignedDriver;
     }
 

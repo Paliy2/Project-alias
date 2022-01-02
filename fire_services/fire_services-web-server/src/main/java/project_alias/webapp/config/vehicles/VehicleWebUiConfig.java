@@ -15,6 +15,7 @@ import com.google.inject.Injector;
 import project_alias.common.LayoutComposer;
 import project_alias.common.StandardActions;
 import project_alias.main.menu.vehicles.MiVehicle;
+import project_alias.persons.Person;
 import project_alias.vehicles.Vehicle;
 import project_alias.vehicles.VehicleType;
 import project_alias.vehicles.producers.VehicleProducer;
@@ -80,7 +81,7 @@ public class VehicleWebUiConfig {
                 .addCrit("active").asMulti().bool().also()
                 .addCrit("model").asMulti().text().also()
                 .addCrit("vehicleType").asMulti().autocompleter(VehicleType.class).also()
-                .addCrit("assignedDriver").asMulti().text().also()
+                .addCrit("assignedDriver").asMulti().autocompleter(Person.class).also()
                 .addCrit("desc").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
@@ -113,7 +114,7 @@ public class VehicleWebUiConfig {
                 .addProp("active").asCheckbox().also()
                 .addProp("model").asMultilineText().also()
                 .addProp("vehicleType").asAutocompleter().also()
-                .addProp("assignedDriver").asMultilineText().also()
+                .addProp("assignedDriver").asAutocompleter().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc(MASTER_CANCEL_ACTION_SHORT_DESC).longDesc(MASTER_CANCEL_ACTION_LONG_DESC)
                 .addAction(MasterActions.SAVE).shortDesc(MASTER_SAVE_ACTION_SHORT_DESC).longDesc(MASTER_SAVE_ACTION_LONG_DESC)

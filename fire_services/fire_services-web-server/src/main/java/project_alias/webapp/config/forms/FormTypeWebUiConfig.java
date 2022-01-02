@@ -70,7 +70,7 @@ public class FormTypeWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<FormType> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(2, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 2);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(FormType.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(FormType.class);
@@ -96,9 +96,9 @@ public class FormTypeWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction).also()
                 .addTopAction(topActionToBatchUpdateFormClasses)
-                .addCrit("this").asMulti().autocompleter(FormType.class).also()
                 .addCrit("title").asMulti().text().also()
                 .addCrit("desc").asMulti().text().also()
+//                .addCrit("this").asMulti().autocompleter(FormType.class).also()
                 .addCrit("formClass").asMulti().autocompleter(FormClass.class).also()
 
 //                .addCrit("formTypeItems").asMulti().autocompleter(FormTypeItem.class).also()
@@ -131,13 +131,13 @@ public class FormTypeWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<FormType> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 2);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 1, 1);
 
         final IMaster<FormType> masterConfig = new SimpleMasterBuilder<FormType>().forEntity(FormType.class)
-                .addProp("formClass").asAutocompleter().also()
                 .addProp("title").asSinglelineText().also()
-                .addProp("desc").asMultilineText().also()
                 .addProp("assignedRole").asAutocompleter().also()
+                .addProp("formClass").asAutocompleter().also()
+                .addProp("desc").asSinglelineText().also()
 //                .addProp("formTypeItems").asAutocompleter().also()
 
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")

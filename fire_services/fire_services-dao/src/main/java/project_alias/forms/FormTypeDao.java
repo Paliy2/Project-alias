@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.security.Authorise;
 import ua.com.fielden.platform.dao.annotations.SessionRequired;
+import project_alias.form_items.FormTypeItem;
 import project_alias.security.tokens.persistent.FormType_CanSave_Token;
 import ua.com.fielden.platform.dao.CommonEntityDao;
 import ua.com.fielden.platform.entity.query.IFilter;
@@ -23,7 +24,12 @@ public class FormTypeDao extends CommonEntityDao<FormType> implements FormTypeCo
     public FormTypeDao(final IFilter filter) {
         super(filter);
     }
-
+    
+    @Override
+    public FormType new_() {
+        return super.new_().setActive(true);
+    }
+    
     @Override
     @SessionRequired
     @Authorise(FormType_CanSave_Token.class)

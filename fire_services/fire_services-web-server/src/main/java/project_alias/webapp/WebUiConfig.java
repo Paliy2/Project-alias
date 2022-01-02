@@ -14,6 +14,7 @@ import project_alias.forms.Status;
 import project_alias.forms.FormClass;
 import project_alias.forms.FormType;
 import project_alias.persons.Person;
+import project_alias.persons.PersonRole;
 import project_alias.roles.Role;
 import project_alias.vehicles.Vehicle;
 import project_alias.vehicles.VehicleType;
@@ -25,6 +26,7 @@ import project_alias.webapp.config.form_items.FormTypeItemWebUiConfig;
 import project_alias.webapp.config.forms.FormClassWebUiConfig;
 import project_alias.webapp.config.forms.FormTypeWebUiConfig;
 import project_alias.webapp.config.forms.StatusWebUiConfig;
+import project_alias.webapp.config.persons.PersonRoleWebUiConfig;
 import project_alias.webapp.config.persons.PersonWebUiConfig;
 import project_alias.webapp.config.roles.RoleWebUiConfig;
 import project_alias.webapp.config.vehicles.VehicleTypeWebUiConfig;
@@ -123,6 +125,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
 
         // Persons Module
         final PersonWebUiConfig personWebUiConfig = PersonWebUiConfig.register(injector(), builder);
+        final PersonRoleWebUiConfig personRoleWebUiConfig = PersonRoleWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration 
         configApp()
@@ -154,6 +157,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         .addMenuItem(mkMenuItemTitle(FormItem.class)).description(mkMenuItemDesc(FormItem.class)).centre(formItemWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(FormClass.class)).description(mkMenuItemDesc(FormClass.class)).centre(formClassWebUiConfig.centre).done()
         .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
+        .addMenuItem(mkMenuItemTitle(PersonRole.class)).description(mkMenuItemDesc(PersonRole.class)).centre(personRoleWebUiConfig.centre).done()
         .addMenuItem("System Users").description("Functionality for managing system users, athorisation, etc.")
         .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
         .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()

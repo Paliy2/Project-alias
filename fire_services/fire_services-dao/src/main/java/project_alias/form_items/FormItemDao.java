@@ -23,7 +23,12 @@ public class FormItemDao extends CommonEntityDao<FormItem> implements FormItemCo
     public FormItemDao(final IFilter filter) {
         super(filter);
     }
-
+    
+    @Override
+    public FormItem new_() {
+        return super.new_().setActive(true);
+    }
+    
     @Override
     @SessionRequired
     @Authorise(FormItem_CanSave_Token.class)

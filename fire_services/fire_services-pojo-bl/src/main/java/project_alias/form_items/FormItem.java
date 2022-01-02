@@ -70,5 +70,10 @@ public class FormItem extends ActivatableAbstractEntity<DynamicEntityKey> {
         return accepted ;
     }
     
-
+    @Override
+    @Observable
+    protected FormItem setActive(boolean active) {
+        super.setActive(active);
+        return this;
+    }
 }
