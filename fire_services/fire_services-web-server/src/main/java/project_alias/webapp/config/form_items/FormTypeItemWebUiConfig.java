@@ -103,7 +103,6 @@ public class FormTypeItemWebUiConfig {
         final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 1);
 
         final IMaster<FormTypeItem> masterConfig = new SimpleMasterBuilder<FormTypeItem>().forEntity(FormTypeItem.class)
-//                .addProp("this").asAutocompleter().also()
                 .addProp("title").asSinglelineText().also()
                 .addProp("desc").asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc(MASTER_CANCEL_ACTION_SHORT_DESC).longDesc(MASTER_CANCEL_ACTION_LONG_DESC)
