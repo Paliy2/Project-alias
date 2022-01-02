@@ -108,7 +108,7 @@ public class FormItemWebUiConfig {
         final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 2);
 
         final IMaster<FormItem> masterConfig = new SimpleMasterBuilder<FormItem>().forEntity(FormItem.class)
-                .addProp("this").asAutocompleter().also()
+//                .addProp("this").asAutocompleter().also()
                 .addProp("formTypeItem").asAutocompleter().also()
                 .addProp("accepted").asCheckbox().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")

@@ -91,15 +91,15 @@ public class FormType extends ActivatableAbstractEntity<DynamicEntityKey> {
 //
 //    @Observable
 //    protected FormType setFormTypeItems (final Set<FormTypeItem> formTypeItems) {
-//        this.formTypeItems.clear();
-//        this.formTypeItems.addAll(formTypeItems);
-//        return this;
+//          this.formTypeItems.clear();
+//    this.formTypeItems.addAll(formTypeItems);
+//    return this;
 //    }
-//
+//    
 //    public Set<FormTypeItem> getFormTypeItems () {
-//        return Collections.unmodifiableSet(formTypeItems);
+//    return Collections.unmodifiableSet(formTypeItems);
 //    }
-    
+//        
 //    @Override
 //    @Observable
 //    protected FormType setActive(boolean active) {
