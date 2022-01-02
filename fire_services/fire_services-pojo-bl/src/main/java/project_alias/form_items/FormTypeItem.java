@@ -29,13 +29,13 @@ import ua.com.fielden.platform.utils.Pair;
  *
  */
 @KeyType(DynamicEntityKey.class)
-@KeyTitle("FormTypeItem")
+@KeyTitle("Form Type Item")
 @CompanionObject(FormTypeItemCo.class)
 @MapEntityTo
 @DescTitle("Description")
 @DisplayDescription
 @DescRequired
-@EntityTitle(value = "FormTypeItem", desc = "Used as a blueprint to create new Form items.")
+@EntityTitle(value = "Form Type Item", desc = "Used as a blueprint to create new Form items.")
 public class FormTypeItem extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     private static final Pair<String, String> entityTitleAndDesc = TitlesDescsGetter.getEntityTitleAndDesc(FormTypeItem.class);
@@ -64,6 +64,13 @@ public class FormTypeItem extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Observable
     public FormTypeItem setDesc(String desc) {
         super.setDesc(desc);
+        return this;
+    }
+	
+	@Override
+    @Observable
+    protected FormTypeItem setActive(boolean active) {
+        super.setActive(active);
         return this;
     }
 }

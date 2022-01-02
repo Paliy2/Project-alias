@@ -22,12 +22,17 @@ import ua.com.fielden.platform.entity.annotation.EntityType;
  */
 @EntityType(FormTypeItem.class)
 public class FormTypeItemDao extends CommonEntityDao<FormTypeItem> implements FormTypeItemCo {
-
+    
     @Inject
     public FormTypeItemDao(final IFilter filter) {
         super(filter);
     }
-
+    
+    @Override
+    public FormTypeItem new_() {
+        return super.new_().setActive(true);
+    }
+    
     @Override
     @SessionRequired
     @Authorise(FormTypeItem_CanSave_Token.class)

@@ -59,7 +59,7 @@ public class FormTypeItemWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<FormTypeItem> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkGridForCentre(2, 1);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(FormTypeItem.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(FormTypeItem.class);
@@ -75,15 +75,18 @@ public class FormTypeItemWebUiConfig {
                 .addTopAction(standardDeleteAction).also()
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
-                .addCrit("this").asMulti().autocompleter(FormTypeItem.class).also()
+//                .addCrit("this").asMulti().autocompleter(FormTypeItem.class).also()
+                .addCrit("title").asMulti().text().also()
                 .addCrit("desc").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
-                .addProp("this").order(1).asc().width(100)
-                    .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", FormTypeItem.ENTITY_TITLE)).also()
+//                .addProp("this").order(1).asc().minWidth(150)
+//                    .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", FormTypeItem.ENTITY_TITLE)).also()
+                .addProp("title").minWidth(150).also()
                 .addProp("desc").minWidth(300)
+
                 .addPrimaryAction(standardEditAction)
                 .build();
 

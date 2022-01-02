@@ -3,6 +3,8 @@ package project_alias.webapp.config.form_items;
 import static java.lang.String.format;
 import static project_alias.webui.master.locator.LocatorFactory.mkLocator;
 import project_alias.form_items.FormItemLocator;
+import project_alias.form_items.FormTypeItem;
+
 import static project_alias.common.StandardScrollingConfigs.standardStandaloneScrollingConfig;
 
 import java.util.Optional;
@@ -12,7 +14,7 @@ import com.google.inject.Injector;
 import project_alias.form_items.FormItem;
 import project_alias.common.LayoutComposer;
 import project_alias.common.StandardActions;
-
+import project_alias.equipments.Equipment;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
 import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
 import ua.com.fielden.platform.web.centre.api.EntityCentreConfig;
@@ -57,7 +59,7 @@ public class FormItemWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<FormItem> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 1);
 
         final EntityActionConfig locator = mkLocator(builder, injector, FormItemLocator.class, "formItem");
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(FormItem.class);
@@ -77,7 +79,8 @@ public class FormItemWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit("this").asMulti().autocompleter(FormItem.class).also()
-                .addCrit("desc").asMulti().text()
+                .addCrit("formTypeItem").asMulti().autocompleter(FormTypeItem.class).also()
+                .addCrit("accepted").asMulti().bool()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -85,8 +88,8 @@ public class FormItemWebUiConfig {
                 .addProp("this").order(1).asc().minWidth(100)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", FormItem.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
-                .addProp("desc").minWidth(100)
-                //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
+                .addProp("accepted").minWidth(100).also()
+                .addProp("formTypeItem").minWidth(100)
                 .addPrimaryAction(standardEditAction)
                 .build();
 
@@ -100,11 +103,12 @@ public class FormItemWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<FormItem> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 1);
 
         final IMaster<FormItem> masterConfig = new SimpleMasterBuilder<FormItem>().forEntity(FormItem.class)
-                .addProp("key").asSinglelineText().also()
-                .addProp("desc").asMultilineText().also()
+//                .addProp("this").asAutocompleter().also()
+                .addProp("formTypeItem").asAutocompleter().also()
+                .addProp("accepted").asCheckbox().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())

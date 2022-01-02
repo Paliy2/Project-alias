@@ -18,6 +18,7 @@ import project_alias.vehicles.Vehicle;
 import project_alias.roles.Role;
 import project_alias.form_items.FormTypeItem;
 import project_alias.persons.Person;
+import project_alias.persons.PersonRole;
 import project_alias.vehicles.ui_actions.OpenVehicleTypeMasterAction;
 import project_alias.equipments.ui_actions.OpenEquipmentClassMasterAction;
 import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenMain_MenuItem;
@@ -26,7 +27,11 @@ import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenMain_Men
 import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_MenuItem;
 import project_alias.form_items.FormItem;
 import project_alias.form_items.FormItemLocator;
-import project_alias.persons.PersonRole;
+import project_alias.forms.FormType;
+import project_alias.forms.actions.FormTypeBatchUpdateForAssetClassAction;
+import project_alias.forms.FormClass;
+import project_alias.forms.FormClassLocator;
+import project_alias.forms.actions.FormTypeBatchUpdateForFormClassAction;
 
 /**
  * A class to register domain entities.
@@ -39,24 +44,29 @@ public class ApplicationDomain implements IApplicationDomainProvider {
     private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
 
     static {
-    	entityTypes.addAll(PlatformDomainTypes.types);
-    	add(EquipmentClass.class);
-    	add(Status.class);
-    	add(VehicleType.class);
-    	add(EquipmentType.class);
-    	add(Equipment.class);
-    	add(Vehicle.class);
-    	add(Role.class);
-    	add(FormTypeItem.class);
-    	add(Person.class);
-    	add(OpenEquipmentClassMasterAction.class);
-    	add(EquipmentClassMaster_OpenMain_MenuItem.class);
-    	add(EquipmentClassMaster_OpenEquipmentType_MenuItem.class);
-    	add(OpenVehicleTypeMasterAction.class);
-    	add(VehicleTypeMaster_OpenMain_MenuItem.class);
-    	add(VehicleTypeMaster_OpenVehicle_MenuItem.class);
-    	add(FormItem.class);
-    	add(FormItemLocator.class);
+        entityTypes.addAll(PlatformDomainTypes.types);
+        add(EquipmentClass.class);
+        add(Status.class);
+        add(VehicleType.class);
+        add(EquipmentType.class);
+        add(Equipment.class);
+        add(Vehicle.class);
+        add(Role.class);
+        add(FormTypeItem.class);
+        add(Person.class);
+        add(OpenEquipmentClassMasterAction.class);
+        add(EquipmentClassMaster_OpenMain_MenuItem.class);
+        add(EquipmentClassMaster_OpenEquipmentType_MenuItem.class);
+        add(OpenVehicleTypeMasterAction.class);
+        add(VehicleTypeMaster_OpenMain_MenuItem.class);
+        add(VehicleTypeMaster_OpenVehicle_MenuItem.class);
+        add(FormItem.class);
+        add(FormItemLocator.class);
+        add(FormType.class);
+        add(FormTypeBatchUpdateForAssetClassAction.class);
+        add(FormClass.class);
+        add(FormClassLocator.class);
+        add(FormTypeBatchUpdateForFormClassAction.class);
     	add(PersonRole.class);
     }
 

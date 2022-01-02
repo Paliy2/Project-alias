@@ -5,6 +5,7 @@ import static java.lang.String.format;
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.FileInputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -13,6 +14,9 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.H2Dialect;
 
 import project_alias.config.ApplicationDomain;
+import project_alias.form_items.FormItem;
+import project_alias.form_items.FormTypeItem;
+import project_alias.forms.FormClass;
 import project_alias.forms.Status;
 import project_alias.persons.Person;
 import project_alias.vehicles.Vehicle;
@@ -80,8 +84,8 @@ public class PopulateDb extends DomainDrivenDataPopulation {
         setupUser(User.system_users.SU, "project.alias");
         setupPerson(User.system_users.SU, "project.alias");
 
-        co(Status.class).save(co(Status.class).new_().setTitle("Approved").setDesc("The form is approved"));
-        co(Status.class).save(co(Status.class).new_().setTitle("Disapproved").setDesc("The form is disapproved"));
+        final var status_appoved = co(Status.class).save(co(Status.class).new_().setTitle("Approved").setDesc("The form is approved"));
+        final var status_disappoved = co(Status.class).save(co(Status.class).new_().setTitle("Disapproved").setDesc("The form is disapproved"));
         final var vehicleType = co(VehicleType.class).save(co(VehicleType.class).new_().setTitle("Fire truck").setDesc("The conventional fire"
                 + " truck escorts firefighters along with essential tools like fire extinguishers, ladders, breathing apparatuses, "
                 + "hydraulic rescue tools, and floodlights to the scene of a fire."));
@@ -94,7 +98,20 @@ public class PopulateDb extends DomainDrivenDataPopulation {
         co(Vehicle.class).save(co(Vehicle.class).new_().
                 setNumber("AA8888AA").setModel("MAN (TGM12.240)").setVehicleType(vehicleType));
 
-        co(Person.class).save(co(Person.class).new_().setName("Misha").setSurname("Toptikhin").setEmail("mishatop@gmail.com"));
+        final var person_misha = co(Person.class).save(co(Person.class).new_().setName("Misha").setSurname("Toptikhin").setEmail("mishatop@gmail.com"));
+        final var person_anriy = co(Person.class).save(co(Person.class).new_().setName("Andriy").setSurname("Kryvyi").setEmail("andr.brokenq@gmail.com"));
+        
+        final var formTypeItem1 = co(FormTypeItem.class).save(co(FormTypeItem.class).new_()
+                .setTitle("Fire Hose").setDesc("high-pressure hose that carries water or other fire retardant (such as foam) to a fire to extinguish it."));
+        co(FormItem.class).save(co(FormItem.class).new_().setFormTypeItem(formTypeItem1).setAccepted(true));
+        final var formTypeItem2 = co(FormTypeItem.class).save(co(FormTypeItem.class).new_()
+                .setTitle("Fireman gloves").setDesc("Important part of the personal protection equipment."));
+        co(FormItem.class).save(co(FormItem.class).new_().setFormTypeItem(formTypeItem2).setAccepted(true));
+        
+        co(FormClass.class).save(co(FormClass.class).new_().setStatus(status_appoved).setPerson(person_anriy)
+                .setDate(new Date(System.currentTimeMillis())).setNumber("1234"));
+        co(FormClass.class).save(co(FormClass.class).new_().setStatus(status_disappoved).setPerson(person_misha)
+                .setDate(new Date(System.currentTimeMillis())).setNumber("2021"));
 
         LOGGER.info("Completed database creation and population.");
     }
