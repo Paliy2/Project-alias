@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 public enum Modules {
     USERS_AND_PERSONNEL("Users and Personnel", "A module to manage systems users and company personnel.",
-            "mainMenu:help", "#ffeb3b", "#c8b900",
+            "mainMenu:help", "#FDE49C", "#c9b57b",
             UsersAndPersonnelModuleToken.class,
             "project_alias.personnel",
             "ua.com.fielden.platform.security.user"),
