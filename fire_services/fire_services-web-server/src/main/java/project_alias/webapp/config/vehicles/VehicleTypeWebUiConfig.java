@@ -1,8 +1,6 @@
 package project_alias.webapp.config.vehicles;
 
-import static ua.com.fielden.platform.web.PrefDim.mkDim;
-import static project_alias.common.StandardScrollingConfigs.standardEmbeddedScrollingConfig;
-import static project_alias.common.StandardScrollingConfigs.standardStandaloneScrollingConfig;
+import static java.lang.String.format;
 import static project_alias.common.LayoutComposer.CELL_LAYOUT;
 import static project_alias.common.LayoutComposer.FLEXIBLE_LAYOUT_WITH_PADDING;
 import static project_alias.common.LayoutComposer.FLEXIBLE_ROW;
@@ -12,46 +10,47 @@ import static project_alias.common.StandardActionsStyles.MASTER_CANCEL_ACTION_LO
 import static project_alias.common.StandardActionsStyles.MASTER_CANCEL_ACTION_SHORT_DESC;
 import static project_alias.common.StandardActionsStyles.MASTER_SAVE_ACTION_LONG_DESC;
 import static project_alias.common.StandardActionsStyles.MASTER_SAVE_ACTION_SHORT_DESC;
-import static java.lang.String.format;
+import static project_alias.common.StandardScrollingConfigs.standardStandaloneScrollingConfig;
 import static ua.com.fielden.platform.dao.AbstractOpenCompoundMasterDao.enhanceEmbededCentreQuery;
 import static ua.com.fielden.platform.entity_centre.review.DynamicQueryBuilder.createConditionProperty;
+import static ua.com.fielden.platform.web.PrefDim.mkDim;
+import static ua.com.fielden.platform.web.centre.api.context.impl.EntityCentreContextSelector.context;
+import static ua.com.fielden.platform.web.layout.api.impl.LayoutBuilder.cell;
 
 import java.util.Optional;
 
 import com.google.inject.Injector;
 
-import project_alias.vehicles.VehicleType;
-import project_alias.vehicles.Vehicle;
+import project_alias.common.LayoutComposer;
+import project_alias.common.StandardActions;
 import project_alias.main.menu.vehicles.MiVehicleType;
 import project_alias.main.menu.vehicles.MiVehicleTypeMaster_Vehicle;
+import project_alias.persons.Person;
+import project_alias.vehicles.Vehicle;
+import project_alias.vehicles.VehicleType;
+import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenMain_MenuItem;
 import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_MenuItem;
 import project_alias.vehicles.ui_actions.OpenVehicleTypeMasterAction;
 import project_alias.vehicles.ui_actions.producers.OpenVehicleTypeMasterActionProducer;
-import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenMain_MenuItem;
-import ua.com.fielden.platform.web.interfaces.ILayout.Device;
-import ua.com.fielden.platform.web.centre.api.EntityCentreConfig;
-import ua.com.fielden.platform.web.centre.api.impl.EntityCentreBuilder;
-import ua.com.fielden.platform.web.centre.api.actions.EntityActionConfig;
-import ua.com.fielden.platform.web.view.master.api.actions.MasterActions;
-import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
-import ua.com.fielden.platform.web.view.master.api.compound.Compound;
-import ua.com.fielden.platform.web.view.master.api.compound.impl.CompoundMasterBuilder;
-import ua.com.fielden.platform.web.view.master.api.IMaster;
-import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
-import ua.com.fielden.platform.web.PrefDim;
-import ua.com.fielden.platform.web.PrefDim.Unit;
-import project_alias.common.LayoutComposer;
-import project_alias.common.StandardActions;
-import ua.com.fielden.platform.web.centre.EntityCentre;
-import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
-import static ua.com.fielden.platform.web.centre.api.context.impl.EntityCentreContextSelector.context;
-import static ua.com.fielden.platform.web.layout.api.impl.LayoutBuilder.cell;
-
-import ua.com.fielden.platform.web.centre.CentreContext;
-import ua.com.fielden.platform.web.centre.IQueryEnhancer;
 import ua.com.fielden.platform.entity.query.fluent.EntityQueryProgressiveInterfaces.ICompleted;
 import ua.com.fielden.platform.entity.query.fluent.EntityQueryProgressiveInterfaces.IWhere0;
+import ua.com.fielden.platform.web.PrefDim;
+import ua.com.fielden.platform.web.PrefDim.Unit;
+import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
+import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
+import ua.com.fielden.platform.web.centre.CentreContext;
+import ua.com.fielden.platform.web.centre.EntityCentre;
+import ua.com.fielden.platform.web.centre.IQueryEnhancer;
+import ua.com.fielden.platform.web.centre.api.EntityCentreConfig;
+import ua.com.fielden.platform.web.centre.api.actions.EntityActionConfig;
+import ua.com.fielden.platform.web.centre.api.impl.EntityCentreBuilder;
+import ua.com.fielden.platform.web.interfaces.ILayout.Device;
 import ua.com.fielden.platform.web.view.master.EntityMaster;
+import ua.com.fielden.platform.web.view.master.api.IMaster;
+import ua.com.fielden.platform.web.view.master.api.actions.MasterActions;
+import ua.com.fielden.platform.web.view.master.api.compound.Compound;
+import ua.com.fielden.platform.web.view.master.api.compound.impl.CompoundMasterBuilder;
+import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
 /**
  * {@link VehicleType} Web UI configuration.
  *
@@ -150,7 +149,7 @@ public class VehicleTypeWebUiConfig {
                 .addCrit("this").asMulti().autocompleter(Vehicle.class).also()
                 .addCrit("active").asMulti().bool().also()
                 .addCrit("model").asMulti().text().also()
-                .addCrit("assignedDriver").asMulti().text().also()
+                .addCrit("assignedDriver").asMulti().autocompleter(Person.class).also()
                 .addCrit("desc").asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
