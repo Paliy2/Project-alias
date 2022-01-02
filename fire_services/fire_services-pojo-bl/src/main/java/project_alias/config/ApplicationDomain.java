@@ -18,6 +18,7 @@ import project_alias.vehicles.Vehicle;
 import project_alias.roles.Role;
 import project_alias.form_items.FormTypeItem;
 import project_alias.persons.Person;
+import project_alias.persons.PersonRole;
 import project_alias.vehicles.ui_actions.OpenVehicleTypeMasterAction;
 import project_alias.equipments.ui_actions.OpenEquipmentClassMasterAction;
 import project_alias.equipments.master.menu.actions.EquipmentClassMaster_OpenMain_MenuItem;
@@ -26,15 +27,11 @@ import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenMain_Men
 import project_alias.vehicles.master.menu.actions.VehicleTypeMaster_OpenVehicle_MenuItem;
 import project_alias.form_items.FormItem;
 import project_alias.form_items.FormItemLocator;
-<<<<<<< HEAD
 import project_alias.forms.FormType;
 import project_alias.forms.actions.FormTypeBatchUpdateForAssetClassAction;
 import project_alias.forms.FormClass;
 import project_alias.forms.FormClassLocator;
 import project_alias.forms.actions.FormTypeBatchUpdateForFormClassAction;
-=======
-import project_alias.persons.PersonRole;
->>>>>>> 10e2d0470f8f607142f493230738f2a2024cdd6b
 
 /**
  * A class to register domain entities.

@@ -27,7 +27,7 @@ public class FormClassDao extends CommonEntityDao<FormClass> implements FormClas
     
     @Override
     public FormClass new_() {
-        return super.new_().setActive(true);
+        return super.new_().setNumber(DEFAULT_KEY_VALUE).setActive(true);
     }
     
     @Override

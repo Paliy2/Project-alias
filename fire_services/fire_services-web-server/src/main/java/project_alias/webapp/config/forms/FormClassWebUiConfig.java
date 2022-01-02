@@ -110,11 +110,11 @@ public class FormClassWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<FormClass> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 2);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 1);
 
         final IMaster<FormClass> masterConfig = new SimpleMasterBuilder<FormClass>().forEntity(FormClass.class)
-                .addProp("status").asAutocompleter().also()
                 .addProp("person").asAutocompleter().also()
+                .addProp("status").asAutocompleter().also()
                 .addProp("date").asDateTimePicker().also()
 //                .addProp("formType").asAutocompleter().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
