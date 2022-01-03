@@ -15,7 +15,6 @@ import ua.com.fielden.platform.entity.annotation.DescTitle;
 import ua.com.fielden.platform.entity.annotation.DisplayDescription;
 import ua.com.fielden.platform.entity.annotation.EntityTitle;
 import ua.com.fielden.platform.entity.annotation.IsProperty;
-import ua.com.fielden.platform.entity.annotation.DescRequired;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 
@@ -47,7 +46,7 @@ public class FormItem extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     @Observable
     public FormItem setFormTypeItem(final FormTypeItem formTypeItem ) {
-        this.formTypeItem = formTypeItem ;
+        this.formTypeItem = formTypeItem;
         return this;
     }
 
